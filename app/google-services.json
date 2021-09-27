@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "30750659718",
+    "project_id": "dynamiccommunication-64189",
+    "storage_bucket": "dynamiccommunication-64189.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30750659718:android:a14c0ea3030f94e9c02d07",
+        "android_client_info": {
+          "package_name": "com.ryanjoshuachildress.dynamiccommunication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30750659718-hj5jkntk84agjraekv01mso4vm5scjba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmI2OWX6a0j4mV09hTPNg-ll15AhvsGI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30750659718-hj5jkntk84agjraekv01mso4vm5scjba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
