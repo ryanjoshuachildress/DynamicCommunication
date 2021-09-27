@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_splash_backround"
+    tools:context=".activities.SplashActivity">
+
+    <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextViewBold
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splash_screen_appName"
+        android:textColor="@color/color_white"
+        android:layout_marginBottom="@dimen/margin"
+
+        android:textSize="@dimen/splash_title_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextViewBold>
+
+    <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextView
+        android:id="@+id/tvDevUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginBottom="@dimen/margin"
+        android:text="@string/dev_web_url"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/splash_other_text_size"
+        app:layout_constraintBottom_toTopOf="@id/tvCopyright"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextView>
+
+    <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextView
+        android:id="@+id/tvCopyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin"
+        android:text="@string/copyright"
+        android:textColor="@color/color_white"
+
+        android:textSize="@dimen/splash_other_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
