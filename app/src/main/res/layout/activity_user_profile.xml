@@ -153,7 +153,7 @@
                     android:id="@+id/etMobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text|phone"
+                    android:inputType="phone"
                     android:padding="@dimen/padding"
                     android:textColor="@color/color_primary_text"
                     android:textSize="@dimen/login_screen_text_size"/>
