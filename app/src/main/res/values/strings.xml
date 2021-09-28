@@ -3,4 +3,6 @@
     <string name="splash_screen_appName">Dynamic Communication</string>
     <string name="dev_web_url">ryanjoshuachildress.com</string>
     <string name="copyright">Copyright - 2021</string>
+    <string name="login_screen_title">LOGIN</string>
+    <string name="register_screen_title">REGISTER</string>
 </resources>
