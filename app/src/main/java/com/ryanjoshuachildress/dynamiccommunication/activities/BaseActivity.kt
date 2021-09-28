@@ -2,9 +2,7 @@ package com.ryanjoshuachildress.dynamiccommunication.activities
 
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.ryanjoshuachildress.dynamiccommunication.R
@@ -24,7 +22,7 @@ open class BaseActivity : AppCompatActivity() {
         }
         else {
 
-            snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.snackbar_sucess_color))
+            snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.snackbar_success_color))
             snackbar.show()
         }
     }

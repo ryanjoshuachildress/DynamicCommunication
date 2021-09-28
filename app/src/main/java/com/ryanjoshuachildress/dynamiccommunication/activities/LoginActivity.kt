@@ -16,6 +16,7 @@ import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityLoginBin
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
+import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 
 
 class LoginActivity : BaseActivity() {
@@ -93,8 +94,14 @@ class LoginActivity : BaseActivity() {
 
     fun userLoggedInSuccess(user: User) {
         hideProgressDialog()
-        startActivity(Intent(this,MainActivity::class.java))
-        finish()
+
+        if(user.profileCompleted) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            startActivity(Intent(this, UserProfileActivity::class.java))
+        }
     }
 
 

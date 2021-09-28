@@ -88,6 +88,9 @@ class FirestoreClass {
                     is com.ryanjoshuachildress.dynamiccommunication.activities.LoginActivity -> {
                         activity.userLoggedInSuccess(user)
                     }
+                    is com.ryanjoshuachildress.dynamiccommunication.activities.UserProfileActivity -> {
+                        activity.populateUserDataFromFirebase(user)
+                    }
                 }
 
             }

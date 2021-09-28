@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#FFBB86FC</color>
+    <color name="color_primary">#2D4270</color>
     <color name="color_primary_dark">#FF6200EE</color>
-    <color name="color_accent">#FF3700B3</color>
+    <color name="color_accent">#AAC1F2</color>
 
     <color name="color_primary_text">#222934</color>
     <color name="color_secondary_text">#989898</color>
@@ -16,6 +16,6 @@
 
     <color name="color_white">#FFFFFF</color>
 
-    <color name="snackbar_error_color">#FF0000</color>
-    <color name="snackbar_sucess_color">#00FF00</color>
+    <color name="snackbar_error_color">#D40627</color>
+    <color name="snackbar_success_color">#27D417</color>
 </resources>

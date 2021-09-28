@@ -1,6 +1,7 @@
 package com.ryanjoshuachildress.dynamiccommunication.utils
 
 object Constants {
+    const val READ_STORAGE_PERMISSION_CODE: Int = 100
     const val USERS: String = "users"
     const val LOGS: String = "logs"
 

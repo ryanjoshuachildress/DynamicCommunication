@@ -11,4 +11,7 @@
     <dimen name="padding">8dp</dimen>
     <dimen name="large_margin">30dp</dimen>
     <dimen name="progress_bar_size">50dp</dimen>
+    <dimen name="profile_user_image_size">200dp</dimen>
+    <dimen name="corner_radius">10dp</dimen>
+    <dimen name="stroke_width">2dp</dimen>
 </resources>

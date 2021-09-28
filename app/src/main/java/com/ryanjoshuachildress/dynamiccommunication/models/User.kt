@@ -11,4 +11,4 @@ class User (
     val profileCompleted: Boolean = false,
     val isModerator: Boolean = false,
     val isAdmin: Boolean = false
-        )
+    )
