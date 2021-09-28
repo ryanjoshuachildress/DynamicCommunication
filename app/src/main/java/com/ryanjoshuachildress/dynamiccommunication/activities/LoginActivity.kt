@@ -8,12 +8,15 @@ import android.text.TextUtils
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityLoginBinding
+import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
-import com.ryanjoshuachildress.dynamiccommunication.utils.LogDBHelper
+import com.ryanjoshuachildress.dynamiccommunication.models.User
+
 
 class LoginActivity : BaseActivity() {
 
@@ -34,7 +37,7 @@ class LoginActivity : BaseActivity() {
         }
 
         binding.tvForgotPassword.setOnClickListener{
-
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
         setContentView(binding.root)
@@ -58,12 +61,12 @@ class LoginActivity : BaseActivity() {
             showProgressDialog("Please Wait")
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener { task ->
-                    hideProgressDialog()
                     if(task.isSuccessful) {
-                        showErrorToast("You are logged in successfully",false)
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-                        LogDBHelper.fWriteToDatabase(LogData(firebaseUser.uid,1,"Logged in Successfully"))
+                        FirestoreClass().logToDatabase(LogData(firebaseUser.uid,1,"Logged in Successfully"))
+                        FirestoreClass().getUserDetails(this)
                     } else {
+                        hideProgressDialog()
                         showErrorToast(task.exception!!.message.toString(),true)
                     }
                 }
@@ -86,6 +89,12 @@ class LoginActivity : BaseActivity() {
                 true
             }
         }
+    }
+
+    fun userLoggedInSuccess(user: User) {
+        hideProgressDialog()
+        startActivity(Intent(this,MainActivity::class.java))
+        finish()
     }
 
 

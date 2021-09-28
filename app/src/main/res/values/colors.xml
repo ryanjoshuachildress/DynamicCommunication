@@ -7,6 +7,13 @@
     <color name="color_primary_text">#222934</color>
     <color name="color_secondary_text">#989898</color>
 
+    <color name="color_primary_night">#FFBB86FC</color>
+    <color name="color_primary_dark_night">#FF6200EE</color>
+    <color name="color_accent_night">#FF3700B3</color>
+
+    <color name="color_primary_text_night">#FFFFFF</color>
+    <color name="color_secondary_text_night">#989898</color>
+
     <color name="color_white">#FFFFFF</color>
 
     <color name="snackbar_error_color">#FF0000</color>

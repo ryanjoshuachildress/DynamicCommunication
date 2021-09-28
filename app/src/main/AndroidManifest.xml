@@ -10,20 +10,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DynamicCommunication">
         <activity
+            android:name=".activities.UserProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.DynamicCommunicationNoActionBar"/>
+        <activity
+            android:name=".activities.ForgotPasswordActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.DynamicCommunicationNoActionBar" />
+        <activity
             android:name=".activities.BaseActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.DynamicCommunicationNoActionBar" />
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.DynamicCommunicationNoActionBar" />
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.DynamicCommunicationNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

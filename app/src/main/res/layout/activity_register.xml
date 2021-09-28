@@ -199,7 +199,7 @@
                 android:textSize="@dimen/login_screen_text_size"/>
 
         </LinearLayout>
-    <Button
+    <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnRegister"

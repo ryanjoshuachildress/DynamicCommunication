@@ -10,9 +10,11 @@ import android.widget.Toast
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityRegisterBinding
+import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
-import com.ryanjoshuachildress.dynamiccommunication.utils.LogDBHelper
+import com.ryanjoshuachildress.dynamiccommunication.models.User
 
 class RegisterActivity : BaseActivity() {
 
@@ -42,6 +44,7 @@ class RegisterActivity : BaseActivity() {
         binding.btnRegister.setOnClickListener{
            registerUser()
         }
+        setupActionBar()
     }
 
 
@@ -83,7 +86,13 @@ class RegisterActivity : BaseActivity() {
             }
         }
     }
-
+    private fun setupActionBar() {
+        val actionBar = supportActionBar
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_icon_back)
+        }
+    }
     private fun registerUser(){
         if(validateRegisterDetails()) {
             showProgressDialog("Please Wait")
@@ -92,7 +101,6 @@ class RegisterActivity : BaseActivity() {
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener { task ->
-hideProgressDialog()
                     if(task.isSuccessful)
                     {
                         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
@@ -100,9 +108,17 @@ hideProgressDialog()
                                 hideProgressDialog()
                                 if(task.isSuccessful) {
                                     val firebaseUser: FirebaseUser = task.result!!.user!!
-                                    LogDBHelper.fWriteToDatabase(LogData(firebaseUser.uid,1,"Registered Successfully"))
+                                    FirestoreClass().logToDatabase(LogData(firebaseUser.uid,1,"Registered Successfully"))
+                                    val user = User(
+                                        firebaseUser.uid,
+                                        binding.etFirstName.text.toString().trim{it <= ' '},
+                                        binding.etLastName.text.toString().trim{it <= ' '},
+                                        binding.etEmail.text.toString().trim{it <= ' '}
+                                    )
+                                    FirestoreClass().registerUser(this,user)
                                 } else {
                                     showErrorToast(task.exception!!.message.toString(),true)
+                                    hideProgressDialog()
                                 }
                             }
                         val firebaseUser: FirebaseUser = task.result!!.user!!
@@ -116,5 +132,17 @@ hideProgressDialog()
                 }
 
         }
+    }
+
+    fun userRegistrationSuccess() {
+        hideProgressDialog()
+
+        Toast.makeText(
+            this,
+            "Registered Successfully",
+            Toast.LENGTH_SHORT
+        ).show()
+
+
     }
 }

@@ -1,5 +1,6 @@
 package com.ryanjoshuachildress.dynamiccommunication.activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityMainBinding
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivitySplashBinding
+import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         // Obtain the FirebaseAnalytics instance.
         analytics = Firebase.analytics
 
+        val sharedPreferences = getSharedPreferences(Constants.DYNAMICCOMMUNICATION_PREFERENCES, Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString(Constants.LOGGED_IN_USERNAME, "")!!
+
+        binding.tvMain.text = "Hello ${username}"
 
 
 
