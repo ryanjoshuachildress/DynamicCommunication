@@ -3,13 +3,8 @@ package com.ryanjoshuachildress.dynamiccommunication.utils
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.provider.ContactsContract
 import android.provider.MediaStore
-import android.util.Log
 import android.webkit.MimeTypeMap
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.ryanjoshuachildress.dynamiccommunication.activities.UserProfileActivity
 
 object Constants {
     const val READ_STORAGE_PERMISSION_CODE: Int = 100
@@ -27,10 +22,11 @@ object Constants {
 
     const val MOBILE: String = "mobile"
     const val IMAGE: String = "image"
-    const val USER_PROFILE_IMAGE: String = "user_profile_image"
+    const val USER_PROFILE_IMAGE: String = "user_profile_image/"
     const val GENDER: String = "gender"
     const val FIRSTNAME: String = "firstName"
-    const val LASTNAME: String = "LastName"
+    const val LASTNAME: String = "lastName"
+    const val PROFILE_COMPLETED: String = "profileCompleted"
 
 
 

@@ -1,4 +1,4 @@
-package com.ryanjoshuachildress.dynamiccommunication.activities
+package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.content.Intent
 import android.os.Build

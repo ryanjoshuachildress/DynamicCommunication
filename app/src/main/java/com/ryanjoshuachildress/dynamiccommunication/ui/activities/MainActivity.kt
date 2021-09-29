@@ -1,4 +1,4 @@
-package com.ryanjoshuachildress.dynamiccommunication.activities
+package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

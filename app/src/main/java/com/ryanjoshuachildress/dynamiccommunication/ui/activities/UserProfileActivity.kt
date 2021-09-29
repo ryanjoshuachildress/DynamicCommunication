@@ -1,4 +1,4 @@
-package com.ryanjoshuachildress.dynamiccommunication.activities
+package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.app.Activity
 import android.content.Context
@@ -10,17 +10,19 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityUserProfileBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
+import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 import com.ryanjoshuachildress.dynamiccommunication.utils.GlideLoader
-import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
 class UserProfileActivity : BaseActivity() {
     private lateinit var binding: ActivityUserProfileBinding
     private var mSelectImageFileUri: Uri? = null
+    private var mUserProfileImageURL: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,44 +41,56 @@ class UserProfileActivity : BaseActivity() {
             selectUserImage()
         }
         binding.btnSubmit.setOnClickListener{
-            showProgressDialog("please wait")
-            FirestoreClass().uploadImageTOCloudStorage(this, mSelectImageFileUri)
-            if(validateUserProfileDetails()){
 
-                val userHashMap = HashMap<String,Any>()
-
-                val mobileNumber = binding.etMobileNumber.text.toString().trim{ it <= ' '}
-                val firstName = binding.etFirstName.text.toString().trim{ it <= ' '}
-                val lastName = binding.etLastName.text.toString().trim{ it <= ' '}
-
-                val gender = when{
-                    binding.rbMale.isChecked -> {
-                        Constants.MALE
-                    }
-                    binding.rbFemale.isChecked -> {
-                        Constants.FEMALE
-                    }
-                    else ->
-                    {
-                        Constants.OTHER
-                    }
+            if(validateUserProfileDetails()) {
+                showProgressDialog("please wait")
+                if (mSelectImageFileUri != null) {
+                    FirestoreClass().uploadImageTOCloudStorage(this, mSelectImageFileUri)
+                } else
+                {
+                    updateUserProfileDetails()
                 }
-                if(mobileNumber.isNotEmpty()) {
-                    userHashMap[Constants.FIRSTNAME] = firstName
-                }
-                if(mobileNumber.isNotEmpty()) {
-                    userHashMap[Constants.LASTNAME] = lastName
-                }
+            }
 
-                if(mobileNumber.isNotEmpty()) {
-                    userHashMap[Constants.MOBILE] = mobileNumber.toLong()
-                }
-                userHashMap[Constants.GENDER] = gender
-                showProgressDialog("Please Wait")
+        }
+    }
 
-                FirestoreClass().updateUserProfileData(this,userHashMap)
+    private fun updateUserProfileDetails() {
+        val userHashMap = HashMap<String, Any>()
+
+        val mobileNumber = binding.etMobileNumber.text.toString().trim { it <= ' ' }
+        val firstName = binding.etFirstName.text.toString().trim { it <= ' ' }
+        val lastName = binding.etLastName.text.toString().trim { it <= ' ' }
+
+        val gender = when {
+            binding.rbMale.isChecked -> {
+                Constants.MALE
+            }
+            binding.rbFemale.isChecked -> {
+                Constants.FEMALE
+            }
+            else -> {
+                Constants.OTHER
             }
         }
+        if (firstName.isNotEmpty()) {
+            userHashMap[Constants.FIRSTNAME] = firstName
+        }
+        if (lastName.isNotEmpty()) {
+            userHashMap[Constants.LASTNAME] = lastName
+        }
+        if (mUserProfileImageURL.isNotEmpty()) {
+            userHashMap[Constants.IMAGE] = mUserProfileImageURL
+        }
+
+        if (mobileNumber.isNotEmpty()) {
+            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+        }
+        userHashMap[Constants.GENDER] = gender
+        userHashMap[Constants.PROFILE_COMPLETED] = true
+
+        FirestoreClass().updateUserProfileData(this, userHashMap)
+        FirestoreClass().logToDatabase(LogData(1,"User Profile Updated"))
     }
 
     private fun selectUserImage() {
@@ -120,8 +134,11 @@ class UserProfileActivity : BaseActivity() {
     {
         binding.etEmail.setText(userDetails.email)
         binding.etEmail.isEnabled = false
+        binding.etMobileNumber.setText(userDetails.mobile.toString())
         binding.etLastName.setText(userDetails.lastName)
         binding.etFirstName.setText(userDetails.firstName)
+        GlideLoader(this).loadUserPicture(userDetails.image!!.toUri(),binding.ivUserPhoto)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -152,7 +169,7 @@ class UserProfileActivity : BaseActivity() {
                 false
             }
             TextUtils.isEmpty(binding.etLastName.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a Lat Name", true)
+                showErrorToast("Please enter a Last Name", true)
                 false
             }
 
@@ -163,15 +180,15 @@ class UserProfileActivity : BaseActivity() {
     }
 
     fun imageUploadSuccess(imageURL: String) {
-        hideProgressDialog()
-        showErrorToast("Your image is uploaded sucessfully. image URL is ${imageURL}", false)
+        mUserProfileImageURL = imageURL
+        updateUserProfileDetails()
     }
 
     fun userProfileUpdateSuccess() {
         hideProgressDialog()
         Toast.makeText(this,"User Profile Updated Successfully",Toast.LENGTH_SHORT).show()
 
-        startActivity(Intent(this,MainActivity::class.java))
+        startActivity(Intent(this, DashboardActivity::class.java))
         finish()
     }
 

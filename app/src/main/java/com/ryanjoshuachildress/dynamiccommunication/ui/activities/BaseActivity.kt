@@ -1,16 +1,19 @@
-package com.ryanjoshuachildress.dynamiccommunication.activities
+package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.ryanjoshuachildress.dynamiccommunication.R
+import java.util.logging.Handler
 
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
     private lateinit var snackbar: Snackbar
+    private var doubleBackToExitPressedOnce = false
 
     fun showErrorToast(message: String, errorMessage: Boolean) {
         snackbar = Snackbar.make(findViewById(android.R.id.content),message,Snackbar.LENGTH_LONG)
@@ -40,5 +43,18 @@ open class BaseActivity : AppCompatActivity() {
     fun hideProgressDialog()
     {
         mProgressDialog.dismiss()
+    }
+
+    fun doubleBackToExit(){
+        if(doubleBackToExitPressedOnce){
+            super.onBackPressed()
+            return
+        }
+        this.doubleBackToExitPressedOnce = true
+
+        Toast.makeText(this,"Press Back Again to Exit",Toast.LENGTH_SHORT).show()
+
+        @Suppress("DEPRECATION")
+        android.os.Handler().postDelayed({doubleBackToExitPressedOnce = false},2000)
     }
 }

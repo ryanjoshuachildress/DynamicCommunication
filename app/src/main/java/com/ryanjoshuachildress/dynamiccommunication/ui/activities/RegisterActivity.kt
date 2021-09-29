@@ -1,13 +1,11 @@
-package com.ryanjoshuachildress.dynamiccommunication.activities
+package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.ryanjoshuachildress.dynamiccommunication.R
@@ -108,7 +106,7 @@ class RegisterActivity : BaseActivity() {
                                 hideProgressDialog()
                                 if(task.isSuccessful) {
                                     val firebaseUser: FirebaseUser = task.result!!.user!!
-                                    FirestoreClass().logToDatabase(LogData(firebaseUser.uid,1,"Registered Successfully"))
+                                    FirestoreClass().logToDatabase(LogData(1,"Registered Successfully"))
                                     val user = User(
                                         firebaseUser.uid,
                                         binding.etFirstName.text.toString().trim{it <= ' '},

@@ -1,22 +1,17 @@
-package com.ryanjoshuachildress.dynamiccommunication.activities
+package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityLoginBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
-import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 
 
 class LoginActivity : BaseActivity() {
@@ -64,7 +59,7 @@ class LoginActivity : BaseActivity() {
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-                        FirestoreClass().logToDatabase(LogData(firebaseUser.uid,1,"Logged in Successfully"))
+                        FirestoreClass().logToDatabase(LogData(1,"Logged in Successfully"))
                         FirestoreClass().getUserDetails(this)
                     } else {
                         hideProgressDialog()
@@ -96,7 +91,7 @@ class LoginActivity : BaseActivity() {
         hideProgressDialog()
 
         if(user.profileCompleted) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
             finish()
         } else {

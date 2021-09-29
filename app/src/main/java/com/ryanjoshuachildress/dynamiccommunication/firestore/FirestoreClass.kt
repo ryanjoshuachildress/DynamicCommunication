@@ -6,19 +6,16 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserInfo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.ryanjoshuachildress.dynamiccommunication.activities.RegisterActivity
-import com.ryanjoshuachildress.dynamiccommunication.activities.UserProfileActivity
+import com.ryanjoshuachildress.dynamiccommunication.ui.activities.RegisterActivity
+import com.ryanjoshuachildress.dynamiccommunication.ui.activities.UserProfileActivity
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
+import com.ryanjoshuachildress.dynamiccommunication.ui.activities.LoginActivity
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
-import com.ryanjoshuachildress.dynamiccommunication.activities.LoginActivity as LoginActivity1
 
 class FirestoreClass {
 
@@ -89,10 +86,10 @@ class FirestoreClass {
                 editor.apply()
 
                 when(activity) {
-                    is com.ryanjoshuachildress.dynamiccommunication.activities.LoginActivity -> {
+                    is LoginActivity -> {
                         activity.userLoggedInSuccess(user)
                     }
-                    is com.ryanjoshuachildress.dynamiccommunication.activities.UserProfileActivity -> {
+                    is UserProfileActivity -> {
                         activity.populateUserDataFromFirebase(user)
                     }
                 }
@@ -127,7 +124,7 @@ class FirestoreClass {
     }
     fun uploadImageTOCloudStorage(activity: Activity, imageFileURI: Uri?){
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.IMAGE + System.currentTimeMillis() + "." + Constants.getFileExtension(activity,imageFileURI)
+            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "." + Constants.getFileExtension(activity,imageFileURI)
         )
 
         sRef.putFile(imageFileURI!!).addOnSuccessListener { taskSnapshot ->
@@ -138,7 +135,7 @@ class FirestoreClass {
             )
             taskSnapshot.metadata!!.reference!!.downloadUrl
                 .addOnSuccessListener { uri ->
-                    Log.e("DOwnloadable Image URL", uri.toString())
+                    Log.e("Downloadable Image URL", uri.toString())
                     when (activity) {
                         is UserProfileActivity ->{
                             activity.imageUploadSuccess(uri.toString())
