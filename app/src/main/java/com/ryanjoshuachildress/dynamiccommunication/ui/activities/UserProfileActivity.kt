@@ -11,12 +11,15 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityUserProfileBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 import com.ryanjoshuachildress.dynamiccommunication.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
 class UserProfileActivity : BaseActivity() {
@@ -137,6 +140,18 @@ class UserProfileActivity : BaseActivity() {
         binding.etMobileNumber.setText(userDetails.mobile.toString())
         binding.etLastName.setText(userDetails.lastName)
         binding.etFirstName.setText(userDetails.firstName)
+        when(userDetails.gender)
+        {
+            Constants.MALE -> {
+                rbMale.isChecked = true
+            }
+            Constants.FEMALE -> {
+                rbFemale.isChecked = true
+            }
+            Constants.OTHER -> {
+                rbOther.isChecked = true
+            }
+        }
         GlideLoader(this).loadUserPicture(userDetails.image!!.toUri(),binding.ivUserPhoto)
 
     }
@@ -183,6 +198,7 @@ class UserProfileActivity : BaseActivity() {
         mUserProfileImageURL = imageURL
         updateUserProfileDetails()
     }
+
 
     fun userProfileUpdateSuccess() {
         hideProgressDialog()

@@ -15,6 +15,7 @@ import com.ryanjoshuachildress.dynamiccommunication.ui.activities.UserProfileAct
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
 import com.ryanjoshuachildress.dynamiccommunication.ui.activities.LoginActivity
+import com.ryanjoshuachildress.dynamiccommunication.ui.activities.SettingsActivity
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 
 class FirestoreClass {
@@ -92,8 +93,24 @@ class FirestoreClass {
                     is UserProfileActivity -> {
                         activity.populateUserDataFromFirebase(user)
                     }
+                    is SettingsActivity -> {
+                        activity.userDetailSuccess(user)
+                    }
                 }
 
+            }
+            .addOnFailureListener{
+                when(activity) {
+                    is LoginActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is UserProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is SettingsActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
             }
     }
 

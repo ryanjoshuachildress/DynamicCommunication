@@ -7,15 +7,23 @@
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/drawable/button_background.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/drawable/button_backround.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/drawable/drawable_gender_tab_selector.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/drawable/ic_settings.xml" value="0.1" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_base.xml" value="0.1" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_forgot_password.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_settings.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_splash.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/activity_user_profile.xml" value="0.38054968287526425" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/button_backround.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/dialog_progress.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/fragment_dashboard.xml" value="0.13703703703703704" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/fragment_home.xml" value="0.13703703703703704" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/ryanc/AndroidStudioProjects/DynamicCommunication/app/src/main/res/menu/home_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

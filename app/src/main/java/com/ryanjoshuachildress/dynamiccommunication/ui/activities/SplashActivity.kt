@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowInsets
 import android.view.WindowManager
+import com.google.firebase.auth.FirebaseAuth
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -33,8 +34,16 @@ class SplashActivity : AppCompatActivity() {
         @Suppress("DEPRECATION")
         Handler().postDelayed(
             {
+                val userID = FirebaseAuth.getInstance().currentUser?.uid
+                if (userID == null) {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
+            }
+                else
+                {
+                    startActivity(Intent(this, DashboardActivity::class.java))
+
+                }
             },1500
 
 

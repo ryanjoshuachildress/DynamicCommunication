@@ -9,6 +9,7 @@ class User (
     val mobile: Long = 0,
     val gender: String = "",
     val profileCompleted: Boolean = false,
+    val hasAgreedToTerms: Boolean = false,
     val isModerator: Boolean = false,
     val isAdmin: Boolean = false
     )

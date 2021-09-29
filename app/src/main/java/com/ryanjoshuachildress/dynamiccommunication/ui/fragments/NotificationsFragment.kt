@@ -27,8 +27,7 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-            textView.text = "Notification Fragment"
+
         return root
     }
 

@@ -18,14 +18,14 @@
             android:layout_height="match_parent"
             android:contentDescription="Dynamic Communication Backround"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_splash_background"/>
+            android:src="@drawable/ic_background"/>
         <ImageView
             android:layout_width="@dimen/auth_logo_width"
             android:layout_height="@dimen/auth_logo_height"
             android:layout_gravity="center"
             android:contentDescription="Dynamic Communication Logo"
             android:scaleType="fitCenter"
-            android:src="@drawable/dynamics_logo"
+            android:src="@drawable/logo"
             app:tint="@color/color_white" />
     </FrameLayout>
 
