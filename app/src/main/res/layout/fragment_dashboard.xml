@@ -7,5 +7,128 @@
     android:background="@drawable/ic_background"
     tools:context=".ui.fragments.DashboardFragment">
 
+    <FrameLayout
+        android:id="@+id/flHeaderBG"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/auth_header_image_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ivHeaderBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Background"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_background" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarSettings"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="@dimen/padding"
+                android:paddingEnd="@dimen/padding"
+                android:text="Snapshot Overview"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/login_screen_text_size"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+        <FrameLayout
+            android:id="@+id/flQuestionImage"
+            android:layout_width="@dimen/dashboard_image_size"
+            android:layout_height="@dimen/dashboard_image_size"
+            android:layout_marginTop="@dimen/margin">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_background" />
+
+            <ImageView
+                android:id="@+id/ivQuestionImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin"
+                android:contentDescription="User Image"
+                android:scaleType="fitXY"
+                android:src="@drawable/default_user_image" />
+
+        </FrameLayout>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/flAnswersImage"
+            android:layout_width="@dimen/dashboard_image_size"
+            android:layout_height="@dimen/dashboard_image_size"
+            android:layout_marginTop="@dimen/margin">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_background" />
+
+            <ImageView
+                android:id="@+id/ivAnswersImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin"
+                android:contentDescription="User Image"
+                android:scaleType="fitXY"
+                android:src="@drawable/default_user_image" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flUserImage"
+            android:layout_width="@dimen/dashboard_image_size"
+            android:layout_height="@dimen/dashboard_image_size"
+            android:layout_marginTop="@dimen/margin">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_background" />
+
+            <ImageView
+                android:id="@+id/ivUserImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin"
+                android:contentDescription="User Image"
+                android:scaleType="fitXY"
+                android:src="@drawable/default_user_image" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_settings"
         android:title="Settings"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/action_log"
+        android:icon="@drawable/ic_log"
+        android:title="View Logs"
+        app:showAsAction="always"/>
 </menu>

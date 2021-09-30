@@ -10,3 +10,6 @@ class LogData(
     val userID: String = FirestoreClass().getCurrentUserID(),
     val dateTime: Timestamp = com.google.firebase.Timestamp.now()
 )
+{
+    constructor() : this(0, "", "")
+}

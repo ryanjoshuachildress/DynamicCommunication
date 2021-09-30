@@ -109,6 +109,34 @@
             android:text="Logout"
             android:textColor="@color/color_white"
             android:textSize="@dimen/splash_title_text_size" />
+        <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAdministration"
+            android:layout_below="@+id/btnLogout"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/button_background"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingTop="@dimen/padding"
+            android:paddingBottom="@dimen/padding"
+            android:text="Administration"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/splash_title_text_size" />
+        <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnClose"
+            android:layout_below="@+id/btnAdministration"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/button_background"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingTop="@dimen/padding"
+            android:paddingBottom="@dimen/padding"
+            android:text="Moderation"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/splash_title_text_size" />
     </RelativeLayout>
 
 

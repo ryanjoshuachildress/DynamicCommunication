@@ -3,7 +3,9 @@ package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.ryanjoshuachildress.dynamiccommunication.R
@@ -66,6 +68,7 @@ class SettingsActivity : BaseActivity() {
 
         mUserDetails = user
         GlideLoader(this).loadUserPicture(user.image, ivUserImage)
+
         tvName.text = "${user.firstName} ${user.lastName}"
     }
 

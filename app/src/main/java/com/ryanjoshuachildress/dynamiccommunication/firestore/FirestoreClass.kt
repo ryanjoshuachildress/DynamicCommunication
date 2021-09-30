@@ -41,6 +41,7 @@ class FirestoreClass {
 
     }
 
+
     fun logToDatabase(logData: LogData) {
         mFireStore.collection(Constants.LOGS)
             .add(logData)

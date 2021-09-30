@@ -3,13 +3,13 @@ package com.ryanjoshuachildress.dynamiccommunication.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.FragmentHomeBinding
+import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.ui.activities.SettingsActivity
+import com.ryanjoshuachildress.dynamiccommunication.ui.activities.ViewLogActivity
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -22,7 +22,9 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +55,11 @@ class HomeFragment : Fragment() {
         when(id){
             R.id.action_settings -> {
                 startActivity(Intent(activity, SettingsActivity::class.java))
+
+                return true
+            }
+            R.id.action_log -> {
+                startActivity(Intent(activity, ViewLogActivity::class.java))
 
                 return true
             }

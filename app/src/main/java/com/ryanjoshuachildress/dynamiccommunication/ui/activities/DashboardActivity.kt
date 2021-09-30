@@ -6,9 +6,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.ui.activities.BaseActivity
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityDashboardBinding
+import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
+import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 
 class DashboardActivity : BaseActivity() {
 
