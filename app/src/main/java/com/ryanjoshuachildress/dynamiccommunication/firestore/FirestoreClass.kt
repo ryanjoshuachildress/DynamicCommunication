@@ -14,23 +14,25 @@ import com.ryanjoshuachildress.dynamiccommunication.ui.activities.RegisterActivi
 import com.ryanjoshuachildress.dynamiccommunication.ui.activities.UserProfileActivity
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
+import com.ryanjoshuachildress.dynamiccommunication.models.YNMAnswer
+import com.ryanjoshuachildress.dynamiccommunication.models.YNMQuestion
 import com.ryanjoshuachildress.dynamiccommunication.ui.activities.LoginActivity
 import com.ryanjoshuachildress.dynamiccommunication.ui.activities.SettingsActivity
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
+import kotlinx.android.synthetic.main.activity_view_log.*
 
 class FirestoreClass {
 
     private val mFireStore = FirebaseFirestore.getInstance()
 
-    fun registerUser(activity: RegisterActivity, userInfo: User)
-    {
+    fun registerUser(activity: RegisterActivity, userInfo: User) {
         mFireStore.collection(Constants.USERS)
             .document(userInfo.id)
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
                 activity.userRegistrationSuccess()
             }
-            .addOnFailureListener{ e ->
+            .addOnFailureListener { e ->
                 activity.hideProgressDialog()
                 Log.e(
                     activity.javaClass.simpleName,
@@ -41,6 +43,47 @@ class FirestoreClass {
 
     }
 
+    fun addYNMQuestion(question: String)
+    {
+        var questionInfo = YNMQuestion()
+        var timeStamp = System.currentTimeMillis().toString()
+        questionInfo.id = timeStamp
+        questionInfo.question = question
+        mFireStore.collection(Constants.YNMQUESTION)
+            .document(timeStamp)
+            .set(questionInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                logToDatabase(LogData(1,"${timeStamp} YNMQuestion Added"))
+            }
+            .addOnFailureListener{ e ->
+                Log.e(
+                    "this",
+                    "Error while registering the user.",
+                    e
+                )
+            }
+
+    }
+
+    fun answewrYNMQuestion(questionID: String, question:String, answer:String) {
+        var questionInfo = YNMAnswer()
+        questionInfo.answer = answer
+        questionInfo.questionID = questionID
+        questionInfo.question = question
+        questionInfo.UserID = getCurrentUserID()
+        mFireStore.collection(Constants.YNMANSWER)
+            .add(questionInfo)
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener{ e ->
+                Log.e(
+                    "Test",
+                    "Error while writing log data.",
+                    e
+                )
+            }
+    }
 
     fun logToDatabase(logData: LogData) {
         mFireStore.collection(Constants.LOGS)
@@ -66,6 +109,8 @@ class FirestoreClass {
         }
         return currentUserID
     }
+
+
 
     fun getUserDetails(activity: Activity) {
         mFireStore.collection(Constants.USERS)
@@ -174,4 +219,16 @@ class FirestoreClass {
                 }
         }
     }
-}
+
+    fun getTotalUsersCount(): Int {
+        return (0..100000).random()
+
+    }
+    fun getTotalQuestionsCount(): Int {
+        return (0..100000).random()
+
+    }
+    fun getTotalAnswersCount(): Int {
+        return (0..100000).random()
+
+    } }

@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import android.text.format.Time
 import android.webkit.MimeTypeMap
+import java.lang.System.*
 
 object Constants {
     const val READ_STORAGE_PERMISSION_CODE: Int = 100
@@ -12,6 +14,8 @@ object Constants {
 
     const val USERS: String = "users"
     const val LOGS: String = "logs"
+    const val YNMQUESTION = "YNMQuestion"
+    const val YNMANSWER = "YNMAnswer"
 
     const val DYNAMICCOMMUNICATION_PREFERENCES: String = "DynamicCommunicationPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
@@ -27,6 +31,10 @@ object Constants {
     const val FIRSTNAME: String = "firstName"
     const val LASTNAME: String = "lastName"
     const val PROFILE_COMPLETED: String = "profileCompleted"
+
+    const val ANSWER_YES: String = "Yes"
+    const val ANSWER_NO: String = "No"
+    const val ANSWER_MAYBE: String = "Maybe"
 
 
 

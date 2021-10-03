@@ -9,6 +9,8 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import com.google.firebase.auth.FirebaseAuth
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivitySplashBinding
+import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
+import com.ryanjoshuachildress.dynamiccommunication.models.YNMQuestion
 
 class SplashActivity : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
         var binding: ActivitySplashBinding = ActivitySplashBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
 
         @Suppress("DEPRECATION")
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

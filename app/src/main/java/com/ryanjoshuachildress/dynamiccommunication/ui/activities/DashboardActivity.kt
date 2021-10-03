@@ -12,6 +12,7 @@ import com.ryanjoshuachildress.dynamiccommunication.ui.activities.BaseActivity
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityDashboardBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardActivity : BaseActivity() {
 
