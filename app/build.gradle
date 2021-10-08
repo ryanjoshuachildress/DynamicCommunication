@@ -5,9 +5,18 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id 'com.google.firebase.firebase-perf'
+    id 'com.google.firebase.appdistribution'
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\ryanc\\Desktop\\SIgnedKey.jks')
+            storePassword '7fr3DEF*101'
+            keyAlias 'key0'
+            keyPassword '7fr3DEF*101'
+        }
+    }
     compileSdk 31
     buildFeatures {
         viewBinding = true
