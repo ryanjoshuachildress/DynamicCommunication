@@ -63,7 +63,7 @@ class LoginActivity : BaseActivity() {
                         FirestoreClass().getUserDetails(this)
                     } else {
                         hideProgressDialog()
-                        showErrorToast(task.exception!!.message.toString(),true)
+                        showErrorSnackbar(task.exception!!.message.toString(),true)
                     }
                 }
         }
@@ -72,16 +72,16 @@ class LoginActivity : BaseActivity() {
     private fun validateLoginDetails(): Boolean {
         return when {
             TextUtils.isEmpty(binding.etEmail.text.toString().trim { it <= ' ' }) -> {
-                showErrorToast("Please enter an email", true)
+                showErrorSnackbar("Please enter an email", true)
                 false
             }
 
             TextUtils.isEmpty(binding.etPassword.text.toString().trim { it <= ' ' }) -> {
-                showErrorToast("Please enter a password", true)
+                showErrorSnackbar("Please enter a password", true)
                 false
             }
             else -> {
-                showErrorToast("Details Validated", false)
+                showErrorSnackbar("Details Validated", false)
                 true
             }
         }
@@ -91,7 +91,7 @@ class LoginActivity : BaseActivity() {
         hideProgressDialog()
 
         if(user.profileCompleted) {
-            val intent = Intent(this, DashboardActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         } else {

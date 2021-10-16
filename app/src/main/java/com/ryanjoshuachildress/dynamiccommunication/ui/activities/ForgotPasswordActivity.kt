@@ -23,18 +23,18 @@ class ForgotPasswordActivity : BaseActivity() {
     private fun sendForgotPasswordLink() {
         val email = binding.etEmail.text.toString().trim { it <= ' ' }
         if(email.isBlank()) {
-            showErrorToast("Please enter email address",true)
+            showErrorSnackbar("Please enter email address",true)
         } else{
             showProgressDialog("Please Wait")
             FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     hideProgressDialog()
                     if(task.isSuccessful) {
-                        showErrorToast("Email sent successfully",false)
+                        showErrorSnackbar("Email sent successfully",false)
                         finish()
 
                     } else {
-                        showErrorToast(task.exception!!.message.toString(),true)
+                        showErrorSnackbar(task.exception!!.message.toString(),true)
 
                     }
                 }

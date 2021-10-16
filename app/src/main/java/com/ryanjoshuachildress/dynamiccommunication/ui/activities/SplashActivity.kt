@@ -44,7 +44,7 @@ class SplashActivity : AppCompatActivity() {
             }
                 else
                 {
-                    startActivity(Intent(this, DashboardActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
 
                 }
             },1500

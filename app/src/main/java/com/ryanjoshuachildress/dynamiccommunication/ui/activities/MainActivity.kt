@@ -12,7 +12,7 @@ import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityMainBind
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivitySplashBinding
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var analytics: FirebaseAnalytics
 
@@ -33,5 +33,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    }
+    override fun onBackPressed() {
+        doubleBackToExit()
     }
 }

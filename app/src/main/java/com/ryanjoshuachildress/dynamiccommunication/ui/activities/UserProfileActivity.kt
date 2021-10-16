@@ -11,14 +11,12 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityUserProfileBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 import com.ryanjoshuachildress.dynamiccommunication.utils.GlideLoader
-import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
@@ -176,15 +174,15 @@ class UserProfileActivity : BaseActivity() {
     private fun validateUserProfileDetails(): Boolean {
         return when {
             TextUtils.isEmpty(binding.etMobileNumber.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a mobile number", true)
+                showErrorSnackbar("Please enter a mobile number", true)
                 false
             }
             TextUtils.isEmpty(binding.etFirstName.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a First Name", true)
+                showErrorSnackbar("Please enter a First Name", true)
                 false
             }
             TextUtils.isEmpty(binding.etLastName.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a Last Name", true)
+                showErrorSnackbar("Please enter a Last Name", true)
                 false
             }
 
@@ -204,7 +202,7 @@ class UserProfileActivity : BaseActivity() {
         hideProgressDialog()
         Toast.makeText(this,"User Profile Updated Successfully",Toast.LENGTH_SHORT).show()
 
-        startActivity(Intent(this, DashboardActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

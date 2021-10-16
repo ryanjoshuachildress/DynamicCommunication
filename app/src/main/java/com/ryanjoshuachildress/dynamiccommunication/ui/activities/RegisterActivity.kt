@@ -50,33 +50,33 @@ class RegisterActivity : BaseActivity() {
     private fun validateRegisterDetails(): Boolean {
         return when {
             TextUtils.isEmpty(binding.etFirstName.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a First Name", true)
+                showErrorSnackbar("Please enter a First Name", true)
                 false
             }
 
             TextUtils.isEmpty(binding.etLastName.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a Last Name", true)
+                showErrorSnackbar("Please enter a Last Name", true)
                 false
             }
 
             TextUtils.isEmpty(binding.etEmail.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter an email address", true)
+                showErrorSnackbar("Please enter an email address", true)
                 false
             }
             TextUtils.isEmpty(binding.etPassword.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a password", true)
+                showErrorSnackbar("Please enter a password", true)
                 false
             }
             TextUtils.isEmpty(binding.etConfirmPassword.text.toString().trim{it <= ' '}) -> {
-                showErrorToast("Please enter a password again", true)
+                showErrorSnackbar("Please enter a password again", true)
                 false
             }
             binding.etPassword.text.toString().trim{it <= ' '} != binding.etConfirmPassword.text.toString().trim{it <= ' '} -> {
-                showErrorToast("Password and Confirm password don't match",true)
+                showErrorSnackbar("Password and Confirm password don't match",true)
                 false
             }
             !binding.cbTermsAndConditions.isChecked -> {
-                showErrorToast("Must agree to terms and conditions", true)
+                showErrorSnackbar("Must agree to terms and conditions", true)
                 false
             }
             else -> {
@@ -115,16 +115,16 @@ class RegisterActivity : BaseActivity() {
                                     )
                                     FirestoreClass().registerUser(this,user)
                                 } else {
-                                    showErrorToast(task.exception!!.message.toString(),true)
+                                    showErrorSnackbar(task.exception!!.message.toString(),true)
                                     hideProgressDialog()
                                 }
                             }
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-                        showErrorToast("You are registered successfully! USERID = ${firebaseUser.uid}", false)
+                        showErrorSnackbar("You are registered successfully! USERID = ${firebaseUser.uid}", false)
                         FirebaseAuth.getInstance().signOut()
                         finish()
                     } else {
-                        showErrorToast(task.exception!!.message.toString(), true)
+                        showErrorSnackbar(task.exception!!.message.toString(), true)
                     }
 
                 }

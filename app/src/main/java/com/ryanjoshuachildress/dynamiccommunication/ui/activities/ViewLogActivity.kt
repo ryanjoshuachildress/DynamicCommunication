@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +13,6 @@ import com.google.firebase.firestore.Query
 import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityViewLogBinding
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
-import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 import kotlinx.android.synthetic.main.activity_view_log.*
 
 class ViewLogActivity : BaseActivity() {
@@ -70,7 +68,7 @@ class ViewLogActivity : BaseActivity() {
             }
             .addOnFailureListener { exception ->
                 hideProgressDialog()
-                showErrorToast(exception.message.toString(),true)
+                showErrorSnackbar(exception.message.toString(),true)
             }
 
 
