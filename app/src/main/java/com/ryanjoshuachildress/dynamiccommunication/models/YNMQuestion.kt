@@ -2,6 +2,8 @@ package com.ryanjoshuachildress.dynamiccommunication.models
 
 class YNMQuestion (
     var id: String = "",
-    val image: String = "",
-    var question: String = ""
+    var image: String = "",
+    var question: String = "",
+    var approved: Boolean = false,
+    var active: Boolean = false
     )

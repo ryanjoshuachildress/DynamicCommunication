@@ -1,24 +1,18 @@
 package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.app.Dialog
-import android.view.Window
-import android.widget.*
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.FirebaseFirestore
 import com.ryanjoshuachildress.dynamiccommunication.R
-import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
-import com.ryanjoshuachildress.dynamiccommunication.models.YNMQuestion
-import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
-import java.util.logging.Handler
 
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
     private lateinit var snackbar: Snackbar
     private var doubleBackToExitPressedOnce = false
-    private var allQuestions = ArrayList<YNMQuestion>()
 
     fun showErrorSnackbar(message: String, errorMessage: Boolean) {
         snackbar = Snackbar.make(findViewById(android.R.id.content),message,Snackbar.LENGTH_LONG)

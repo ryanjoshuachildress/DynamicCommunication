@@ -10,16 +10,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.ryanjoshuachildress.dynamiccommunication.ui.activities.RegisterActivity
-import com.ryanjoshuachildress.dynamiccommunication.ui.activities.UserProfileActivity
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
 import com.ryanjoshuachildress.dynamiccommunication.models.YNMAnswer
 import com.ryanjoshuachildress.dynamiccommunication.models.YNMQuestion
-import com.ryanjoshuachildress.dynamiccommunication.ui.activities.LoginActivity
-import com.ryanjoshuachildress.dynamiccommunication.ui.activities.SettingsActivity
+import com.ryanjoshuachildress.dynamiccommunication.ui.activities.*
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
-import kotlinx.android.synthetic.main.activity_view_log.*
 
 class FirestoreClass {
 
@@ -43,30 +39,32 @@ class FirestoreClass {
 
     }
 
-    fun addYNMQuestion(question: String)
+    fun addYNMQuestion(activity: Activity, question: String)
     {
-        var questionInfo = YNMQuestion()
-        var timeStamp = System.currentTimeMillis().toString()
+        val questionInfo = YNMQuestion()
+        val timeStamp = System.currentTimeMillis().toString()
         questionInfo.id = timeStamp
         questionInfo.question = question
         mFireStore.collection(Constants.YNMQUESTION)
             .document(timeStamp)
             .set(questionInfo, SetOptions.merge())
             .addOnSuccessListener {
-                logToDatabase(LogData(1,"${timeStamp} YNMQuestion Added"))
+                logToDatabase(LogData(1,"$timeStamp YNMQuestion Added"))
             }
             .addOnFailureListener{ e ->
-                Log.e(
-                    "this",
-                    "Error while registering the user.",
-                    e
-                )
-            }
+                when(activity) {
+                    is MainActivity -> {
+                        activity.showErrorSnackbar("Could not add question to database",true)
+                        logToDatabase(LogData(3,"Could not add question to database"))
+                    }
+                }
 
     }
 
-    fun answewrYNMQuestion(questionID: String, question:String, answer:String) {
-        var questionInfo = YNMAnswer()
+    }
+
+    fun answerYNMQuestion(questionID: String, question:String, answer:String) {
+        val questionInfo = YNMAnswer()
         questionInfo.answer = answer
         questionInfo.questionID = questionID
         questionInfo.question = question
@@ -82,6 +80,37 @@ class FirestoreClass {
                     "Error while writing log data.",
                     e
                 )
+            }
+    }
+
+    fun getAllUnansweredYNMQuestions(activity: Activity) {
+        val allQuestions = ArrayList<YNMQuestion>()
+        mFireStore.collection(Constants.YNMQUESTION)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    allQuestions.add(document.toObject(YNMQuestion::class.java))
+                }
+                val allYNMAnswer = ArrayList<YNMAnswer>()
+                mFireStore.collection(Constants.YNMANSWER)
+                    .whereEqualTo("userID",getCurrentUserID())
+                    .get()
+                    .addOnSuccessListener { result ->
+                        for (document in result) {
+                            allYNMAnswer.add(document.toObject(YNMAnswer::class.java))
+                        }
+                        when(activity) {
+                            is MainActivity -> {
+                                activity.validateYNMQuestions(allYNMAnswer,allQuestions)
+                            }
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+
+                    }
+            }
+            .addOnFailureListener { exception ->
+
             }
     }
 
@@ -109,8 +138,6 @@ class FirestoreClass {
         }
         return currentUserID
     }
-
-
 
     fun getUserDetails(activity: Activity) {
         mFireStore.collection(Constants.USERS)
@@ -185,6 +212,7 @@ class FirestoreClass {
             }
 
     }
+
     fun uploadImageTOCloudStorage(activity: Activity, imageFileURI: Uri?){
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
             Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "." + Constants.getFileExtension(activity,imageFileURI)
@@ -220,15 +248,38 @@ class FirestoreClass {
         }
     }
 
-    fun getTotalUsersCount(): Int {
-        return (0..100000).random()
+    fun getTotalCounts(activity: Activity) {
+        var iCountUsers = 0
+        var iCountQuestions = 0
+        var iCountAnswers = 0
+        mFireStore.collection(Constants.USERS)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    iCountUsers++
+                }
+                mFireStore.collection(Constants.YNMQUESTION)
+                    .get()
+                    .addOnSuccessListener { result ->
+                        for (document in result) {
+                            iCountQuestions++
+                        }
+                        mFireStore.collection(Constants.YNMANSWER)
+                            .get()
+                            .addOnSuccessListener { result ->
+                                for (document in result) {
+                                    iCountAnswers++
+                                }
 
+                                when(activity) {
+                                    is MainActivity -> {
+                                        activity.updateUI(iCountUsers,iCountQuestions,iCountAnswers)
+                                    }
+                                }
+                            }
+
+                    }
+
+            }
     }
-    fun getTotalQuestionsCount(): Int {
-        return (0..100000).random()
-
-    }
-    fun getTotalAnswersCount(): Int {
-        return (0..100000).random()
-
-    } }
+}

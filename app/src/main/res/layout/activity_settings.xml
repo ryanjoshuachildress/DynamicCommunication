@@ -27,7 +27,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_background" />
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarSettings"
+                android:id="@+id/toolbarMain"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
                 <TextView

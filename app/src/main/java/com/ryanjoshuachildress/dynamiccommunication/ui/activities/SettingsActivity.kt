@@ -1,20 +1,13 @@
 package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.net.toUri
-import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.ryanjoshuachildress.dynamiccommunication.R
-import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityLoginBinding
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivitySettingsBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
 import com.ryanjoshuachildress.dynamiccommunication.models.User
-import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 import com.ryanjoshuachildress.dynamiccommunication.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -47,14 +40,14 @@ class SettingsActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(toolbarSettings)
+        setSupportActionBar(toolbarMain)
 
         val actionBar = supportActionBar
         if(actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.ic_icon_back)
         }
-        toolbarSettings.setNavigationOnClickListener { onBackPressed()}
+        toolbarMain.setNavigationOnClickListener { onBackPressed()}
     }
     private fun getUserDetails()
     {
