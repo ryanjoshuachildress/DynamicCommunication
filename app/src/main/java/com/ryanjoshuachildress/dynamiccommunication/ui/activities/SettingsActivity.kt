@@ -24,15 +24,15 @@ class SettingsActivity : BaseActivity() {
 
         getUserDetails()
         setupActionBar()
-        tvEdit.setOnClickListener{
+        tvEdit.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)
             startActivity(intent)
         }
 
-        btnLogout.setOnClickListener{
-            FirestoreClass().logToDatabase(LogData(1,"Logged Out"))
+        btnLogout.setOnClickListener {
+            FirestoreClass().logToDatabase(LogData(1, "Logged Out"))
             FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this,LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
@@ -43,14 +43,14 @@ class SettingsActivity : BaseActivity() {
         setSupportActionBar(toolbarMain)
 
         val actionBar = supportActionBar
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.ic_icon_back)
         }
-        toolbarMain.setNavigationOnClickListener { onBackPressed()}
+        toolbarMain.setNavigationOnClickListener { onBackPressed() }
     }
-    private fun getUserDetails()
-    {
+
+    private fun getUserDetails() {
         showProgressDialog("Please Wait")
         FirestoreClass().getUserDetails(this)
         hideProgressDialog()

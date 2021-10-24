@@ -5,5 +5,6 @@ class YNMQuestion (
     var image: String = "",
     var question: String = "",
     var approved: Boolean = false,
-    var active: Boolean = false
+    var active: Boolean = false,
+    var Category: Int = 0
     )

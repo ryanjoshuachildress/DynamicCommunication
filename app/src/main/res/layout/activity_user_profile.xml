@@ -169,8 +169,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tilMobileNumber"
-                app:layout_constraintBottom_toTopOf="@+id/btnSumbit">
+                app:layout_constraintTop_toBottomOf="@+id/tilMobileNumber">
 
                 <com.ryanjoshuachildress.dynamiccommunication.utils.MSPRadioButton
                     android:id="@+id/rbMale"
@@ -205,6 +204,70 @@
                     android:button="@null"
                     android:gravity="center"
                     android:text="Other" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rgRating"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rgGender">
+
+                <com.ryanjoshuachildress.dynamiccommunication.utils.MSPRadioButton
+                    android:id="@+id/rbG"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="G" />
+
+                <com.ryanjoshuachildress.dynamiccommunication.utils.MSPRadioButton
+                    android:id="@+id/rbPG"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="PG" />
+
+                <com.ryanjoshuachildress.dynamiccommunication.utils.MSPRadioButton
+                    android:id="@+id/rbR"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="R" />
+
+                <com.ryanjoshuachildress.dynamiccommunication.utils.MSPRadioButton
+                    android:id="@+id/rbXXX"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:hint="Everything Goes"
+                    android:text="XXX" />
+
             </RadioGroup>
 
             <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
@@ -227,7 +290,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgGender"/>
+                app:layout_constraintTop_toBottomOf="@+id/rgGender"
+                tools:targetApi="m" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

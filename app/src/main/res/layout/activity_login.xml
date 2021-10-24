@@ -13,12 +13,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="Dynamic Communication Backround"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_background"/>
+            android:src="@drawable/ic_background" />
+
         <ImageView
             android:layout_width="@dimen/auth_logo_width"
             android:layout_height="@dimen/auth_logo_height"
@@ -29,17 +31,17 @@
             app:tint="@color/color_white" />
     </FrameLayout>
 
-<com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextViewBold
-    android:id="@+id/tvTitle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/margin"
-    android:text="@string/login_screen_title"
-    android:textColor="@color/color_primary_text"
-    android:textSize="@dimen/login_screen_title_text_size"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/flHeaderImage"/>
+    <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextViewBold
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:text="@string/login_screen_title"
+        android:textColor="@color/color_primary_text"
+        android:textSize="@dimen/login_screen_title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flHeaderImage" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
@@ -62,7 +64,7 @@
             android:inputType="textEmailAddress"
             android:padding="@dimen/padding"
             android:textColor="@color/color_primary_text"
-            android:textSize="@dimen/login_screen_text_size"/>
+            android:textSize="@dimen/login_screen_text_size" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,20 +88,21 @@
             android:inputType="textPassword"
             android:padding="@dimen/padding"
             android:textColor="@color/color_primary_text"
-            android:textSize="@dimen/login_screen_text_size"/>
+            android:textSize="@dimen/login_screen_text_size" />
     </com.google.android.material.textfield.TextInputLayout>
-        <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin"
-            android:foreground="?attr/selectableItemBackground"
-            android:padding="@dimen/padding"
-            android:text="Forgot Password?"
-            android:textColor="@color/color_secondary_text"
-            android:textSize="@dimen/login_screen_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilPassword" />
+
+    <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="@dimen/padding"
+        android:text="Forgot Password?"
+        android:textColor="@color/color_secondary_text"
+        android:textSize="@dimen/login_screen_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
     <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
         android:layout_width="match_parent"
@@ -130,6 +133,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLogin">
+
         <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextView
             android:id="@+id/tvDontHaveAnAccount"
             android:layout_width="wrap_content"
@@ -139,7 +143,8 @@
             android:padding="@dimen/padding"
             android:text="Don't have an account?"
             android:textColor="@color/color_secondary_text"
-            android:textSize="@dimen/login_screen_text_size"/>
+            android:textSize="@dimen/login_screen_text_size" />
+
         <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextViewBold
             android:id="@+id/tvRegister"
             android:layout_width="wrap_content"
@@ -149,13 +154,9 @@
             android:padding="@dimen/padding"
             android:text="Register"
             android:textColor="@color/color_secondary_text"
-            android:textSize="@dimen/login_screen_text_size"/>
+            android:textSize="@dimen/login_screen_text_size" />
 
     </LinearLayout>
 
-
-
-
-        
 
 </androidx.constraintlayout.widget.ConstraintLayout>

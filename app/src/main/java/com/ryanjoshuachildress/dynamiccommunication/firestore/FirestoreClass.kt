@@ -114,6 +114,47 @@ class FirestoreClass {
             }
     }
 
+    fun getAllYNMQuestions(activity: Activity) {
+        val allQuestions = ArrayList<YNMQuestion>()
+        mFireStore.collection(Constants.YNMQUESTION)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    allQuestions.add(document.toObject(YNMQuestion::class.java))
+                }
+                when(activity) {
+                    is QuestionActivity -> {
+                        activity.populateQuestionSpinner(allQuestions)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+            }
+    }
+
+    fun getQuestionDetails(activity: Activity, question: YNMQuestion) {
+        val allAnswers = ArrayList<YNMAnswer>()
+        var answerCount = 0
+        var yesCount = 0
+        var noCount = 0
+        var maybeCount = 0
+/*
+        mFireStore.collection(Constants.YNMANSWER)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    allAnswers.add(document.toObject(YNMAnswer::class.java))
+                }
+                when(activity) {
+                    is MainActivity -> {
+                        activity.showYNMQuestionDetails(question.question,answerCount,yesCount,noCount,maybeCount)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+            }*/
+    }
+
     fun logToDatabase(logData: LogData) {
         mFireStore.collection(Constants.LOGS)
             .add(logData)

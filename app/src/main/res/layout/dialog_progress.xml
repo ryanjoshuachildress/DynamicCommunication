@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvProgressBar"/>
+        app:layout_constraintTop_toTopOf="@+id/tvProgressBar" />
+
     <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextViewBold
         android:id="@+id/tvProgressBar"
         android:layout_width="wrap_content"
@@ -26,6 +27,6 @@
         android:textSize="@dimen/splash_title_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pbProgressBar"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

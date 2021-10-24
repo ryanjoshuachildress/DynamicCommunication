@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.Window
@@ -47,6 +48,10 @@ class MainActivity : BaseActivity() {
         btnLaunchYNM.setOnClickListener{
                 showProgressDialog("Getting Question")
                 FirestoreClass().getAllUnansweredYNMQuestions(this)
+        }
+
+        ivQuestionImage.setOnClickListener{
+            startActivity(Intent(this, QuestionActivity::class.java))
         }
 
         FirestoreClass().getTotalCounts(this)
@@ -93,6 +98,25 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
         showYNM(resultQuestions)
     }
 
+    fun showYNMQuestionDetails(question: String,answerCount: Int,yesCount: Int,noCount: Int,maybeCount: Int,)
+    {
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.layout_ynmquestion_details)
+        val tvQuestion = dialog.findViewById(R.id.tvQuestionDetails) as TextView
+        val tvAnswerCount = dialog.findViewById(R.id.tvAnswerCount) as TextView
+
+        tvQuestion.text = question
+        tvAnswerCount.text = answerCount.toString()
+            dialog.show()
+            @Suppress("DEPRECATION")
+            Handler().postDelayed(
+                {
+                    dialog.dismiss()
+                },3000)
+    }
+
     fun showYNM(allQuestions: ArrayList<YNMQuestion>)
     {
         if(allQuestions.size > 0) {
@@ -108,7 +132,7 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
             val ivQuestionImage = dialog.findViewById(R.id.ivQuestionImage) as ImageView
 
             val randomIndex = (0..(allQuestions.size - 1)).random()
-            tvQuestion.text = allQuestions[randomIndex].question.toString()
+            tvQuestion.text = allQuestions[randomIndex].question
 
 
             btnYes.setOnClickListener {
@@ -117,6 +141,7 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
                     allQuestions[randomIndex].question,
                     Constants.ANSWER_YES
                 )
+                FirestoreClass().getQuestionDetails(this,allQuestions[randomIndex])
                 dialog.dismiss()
             }
             btnNo.setOnClickListener {
@@ -125,6 +150,8 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
                     allQuestions[randomIndex].question,
                     Constants.ANSWER_NO
                 )
+                FirestoreClass().getQuestionDetails(this,allQuestions[randomIndex])
+
                 dialog.dismiss()
             }
             btnMaybe.setOnClickListener {
@@ -133,7 +160,10 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
                     allQuestions[randomIndex].question,
                     Constants.ANSWER_MAYBE
                 )
+                FirestoreClass().getQuestionDetails(this,allQuestions[randomIndex])
+
                 dialog.dismiss()
+
             }
             if (dialog != null) {
                 dialog.show()

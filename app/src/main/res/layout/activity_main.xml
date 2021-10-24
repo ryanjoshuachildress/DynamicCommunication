@@ -26,6 +26,7 @@
             android:id="@+id/toolbarMain"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
+
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
@@ -92,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="?"
-                android:textColor="@color/color_white"/>
+                android:textColor="@color/color_white" />
         </LinearLayout>
 
         <LinearLayout
@@ -187,7 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         android:text="Launch YNM"
-        app:layout_constraintTop_toBottomOf="@id/llMain"/>
+        app:layout_constraintTop_toBottomOf="@id/llMain" />
 
     <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
         android:id="@+id/btnLaunchYNMAdd"
@@ -197,9 +198,6 @@
         android:layout_marginTop="@dimen/margin"
         android:text="Add YNM Question"
         app:layout_constraintTop_toBottomOf="@id/btnLaunchYNM" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

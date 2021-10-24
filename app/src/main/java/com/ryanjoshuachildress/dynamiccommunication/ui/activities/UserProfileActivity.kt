@@ -74,6 +74,21 @@ class UserProfileActivity : BaseActivity() {
                 Constants.OTHER
             }
         }
+
+        val rating = when {
+            binding.rbG.isChecked -> {
+                1
+            }
+            binding.rbPG.isChecked -> {
+                2
+            }
+            binding.rbR.isChecked -> {
+                3
+            }
+            else -> {
+                4
+            }
+        }
         if (firstName.isNotEmpty()) {
             userHashMap[Constants.FIRSTNAME] = firstName
         }
@@ -89,6 +104,7 @@ class UserProfileActivity : BaseActivity() {
         }
         userHashMap[Constants.GENDER] = gender
         userHashMap[Constants.PROFILE_COMPLETED] = true
+        userHashMap[Constants.RATING] = rating
 
         FirestoreClass().updateUserProfileData(this, userHashMap)
         FirestoreClass().logToDatabase(LogData(1,"User Profile Updated"))
