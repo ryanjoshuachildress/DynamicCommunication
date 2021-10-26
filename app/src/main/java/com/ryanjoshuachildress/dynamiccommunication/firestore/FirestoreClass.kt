@@ -138,21 +138,34 @@ class FirestoreClass {
         var yesCount = 0
         var noCount = 0
         var maybeCount = 0
-/*
+
         mFireStore.collection(Constants.YNMANSWER)
+            .whereEqualTo("questionID",question.id)
             .get()
+
             .addOnSuccessListener { result ->
-                for (document in result) {
+                for((index,document) in result.withIndex()) {
                     allAnswers.add(document.toObject(YNMAnswer::class.java))
+                    answerCount += 1
+                    if (allAnswers[index].answer == "Yes") {
+                        yesCount += 1
+                    }
+                    if (allAnswers[index].answer == "No") {
+                        noCount += 1
+                    }
+                    if (allAnswers[index].answer == "Maybe") {
+                        maybeCount += 1
+                    }
                 }
                 when(activity) {
                     is MainActivity -> {
                         activity.showYNMQuestionDetails(question.question,answerCount,yesCount,noCount,maybeCount)
                     }
                 }
+
             }
             .addOnFailureListener { exception ->
-            }*/
+            }
     }
 
     fun logToDatabase(logData: LogData) {

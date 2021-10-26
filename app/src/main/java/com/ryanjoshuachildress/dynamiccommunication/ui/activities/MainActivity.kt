@@ -98,17 +98,30 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
         showYNM(resultQuestions)
     }
 
-    fun showYNMQuestionDetails(question: String,answerCount: Int,yesCount: Int,noCount: Int,maybeCount: Int,)
+    fun showYNMQuestionDetails(question: String,answerCount: Int, yesCount: Int, noCount: Int, maybeCount: Int)
     {
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setCancelable(false)
-            dialog.setContentView(R.layout.layout_ynmquestion_details)
-        val tvQuestion = dialog.findViewById(R.id.tvQuestionDetails) as TextView
-        val tvAnswerCount = dialog.findViewById(R.id.tvAnswerCount) as TextView
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.layout_ynmquestion_details)
+        val tvQuestionDetails = dialog.findViewById(R.id.tvQuestionDetails) as TextView
+        val tvAnswerCount = dialog.findViewById(R.id.tvAnsweredCountDetails) as TextView
+        val tvYesCount = dialog.findViewById(R.id.tvYesCountDetails) as TextView
+        val tvYesCountPercentage = dialog.findViewById(R.id.tvYesCountDetailsPercentage) as TextView
+        val tvNoCountPercentage = dialog.findViewById(R.id.tvNoCountDetailsPercentage) as TextView
+        val tvMaybeCountPercentage = dialog.findViewById(R.id.tvMaybeCountDetailsPercentage) as TextView
+        val tvNoCount = dialog.findViewById(R.id.tvNoCountDetails) as TextView
+        val tvMaybeCount = dialog.findViewById(R.id.tvMaybeCountDetails) as TextView
 
-        tvQuestion.text = question
+        tvQuestionDetails.text = question
         tvAnswerCount.text = answerCount.toString()
+        tvYesCount.text = yesCount.toString()
+        //tvYesCountPercentage.text = ((answerCount.div(yesCount)).toFloat().times(100).toString()+"%")
+        //tvNoCountPercentage.text = ((answerCount.div(noCount)).toFloat().times(100).toString()+"%")
+        //tvMaybeCountPercentage.text = ((answerCount.div(maybeCount)).toFloat().times(100).toString()+"%")
+        tvNoCount.text = noCount.toString()
+        tvMaybeCount.text = maybeCount.toString()
+
             dialog.show()
             @Suppress("DEPRECATION")
             Handler().postDelayed(
@@ -202,7 +215,7 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
         tvUserCount.text = userCount.toString()
         tvQuestionCount.text = questionCount.toString()
         tvAnswerCount.text = answerCount.toString()
-        android.os.Handler().postDelayed({FirestoreClass().getTotalCounts(this)},200000)
+        android.os.Handler().postDelayed({FirestoreClass().getTotalCounts(this)},20000)
     }
     override fun onBackPressed() {
         doubleBackToExit()
