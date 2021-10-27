@@ -39,8 +39,7 @@ class FirestoreClass {
 
     }
 
-    fun addYNMQuestion(activity: Activity, question: String)
-    {
+    fun addYNMQuestion(activity: Activity, question: String){
         val questionInfo = YNMQuestion()
         val timeStamp = System.currentTimeMillis().toString()
         questionInfo.id = timeStamp
@@ -114,17 +113,21 @@ class FirestoreClass {
             }
     }
 
-    fun getAllYNMQuestions(activity: Activity) {
+    fun getAllUnapprovedYNMQuestions(activity: Activity) {
         val allQuestions = ArrayList<YNMQuestion>()
         mFireStore.collection(Constants.YNMQUESTION)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    allQuestions.add(document.toObject(YNMQuestion::class.java))
+                    var mQuestion = document.toObject(YNMQuestion::class.java)
+                    if(mQuestion.approved != true)
+                    {
+                        allQuestions.add(mQuestion)
+                    }
                 }
                 when(activity) {
                     is QuestionActivity -> {
-                        activity.populateQuestionSpinner(allQuestions)
+                        activity.loadAllQuestions(allQuestions)
                     }
                 }
             }

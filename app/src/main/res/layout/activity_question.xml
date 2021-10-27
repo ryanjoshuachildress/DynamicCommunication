@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.QuestionActivity">
 
-    <Spinner
-        android:id="@+id/spinnerQuestion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvQuestion"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

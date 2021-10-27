@@ -25,7 +25,6 @@ class ViewLogActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         binding = ActivityViewLogBinding.inflate(layoutInflater)
-        var i = 0
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         @Suppress("DEPRECATION")
