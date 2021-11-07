@@ -1,7 +1,6 @@
 package com.ryanjoshuachildress.dynamiccommunication.models
 
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.PropertyName
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 
 class LogData(

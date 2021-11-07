@@ -7,5 +7,5 @@ class YNMAnswer (
     var questionID:String = "",
     var question: String = "",
     var answer: String = "",
-    val dateTime: Timestamp = com.google.firebase.Timestamp.now()
+    val dateTime: Timestamp = Timestamp.now()
     )

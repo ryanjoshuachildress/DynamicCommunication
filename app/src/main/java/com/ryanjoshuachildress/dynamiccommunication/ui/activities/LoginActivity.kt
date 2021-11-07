@@ -8,6 +8,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityLoginBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 import com.ryanjoshuachildress.dynamiccommunication.models.LogData
@@ -23,25 +24,25 @@ class LoginActivity : BaseActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
-        binding.tvRegister.setOnClickListener{
+        binding.tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        binding.btnLogin.setOnClickListener{
+        binding.btnLogin.setOnClickListener {
             validateLoginDetails()
             loginUser()
         }
 
-        binding.tvForgotPassword.setOnClickListener{
+        binding.tvForgotPassword.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
         setContentView(binding.root)
 
         @Suppress("DEPRECATION")
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
-        }else {
+        } else {
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -53,17 +54,17 @@ class LoginActivity : BaseActivity() {
 
         val email = binding.etEmail.text.toString().trim { it <= ' ' }
         val password = binding.etPassword.text.toString().trim { it <= ' ' }
-        if(validateLoginDetails()) {
-            showProgressDialog("Please Wait")
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
+        if (validateLoginDetails()) {
+            showProgressDialog(getString(R.string.PleaseWait))
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-                    if(task.isSuccessful) {
+                    if (task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
-                        FirestoreClass().logToDatabase(LogData(1,"Logged in Successfully"))
+                        FirestoreClass().logToDatabase(LogData(1, "Logged in Successfully"))
                         FirestoreClass().getUserDetails(this)
                     } else {
                         hideProgressDialog()
-                        showErrorSnackbar(task.exception!!.message.toString(),true)
+                        showSnackbar(task.exception!!.message.toString(), true)
                     }
                 }
         }
@@ -72,16 +73,15 @@ class LoginActivity : BaseActivity() {
     private fun validateLoginDetails(): Boolean {
         return when {
             TextUtils.isEmpty(binding.etEmail.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackbar("Please enter an email", true)
+                showSnackbar(getString(R.string.email_blank_error), true)
                 false
             }
 
             TextUtils.isEmpty(binding.etPassword.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackbar("Please enter a password", true)
+                showSnackbar(getString(R.string.login_password_blank_error), true)
                 false
             }
             else -> {
-                showErrorSnackbar("Details Validated", false)
                 true
             }
         }
@@ -90,7 +90,7 @@ class LoginActivity : BaseActivity() {
     fun userLoggedInSuccess(user: User) {
         hideProgressDialog()
 
-        if(user.profileCompleted) {
+        if (user.profileCompleted) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -19,27 +18,41 @@ import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 
 class FirestoreClass {
 
+    /*
+
+    This class writes and reads data from the firestore database
+
+    */
+
     private val mFireStore = FirebaseFirestore.getInstance()
 
     fun registerUser(activity: RegisterActivity, userInfo: User) {
+
+        /*
+
+    This function writes the user object to firestore on sucessful registration
+
+    might be aniquated and possibly be removed in the future
+
+    */
         mFireStore.collection(Constants.USERS)
             .document(userInfo.id)
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
                 activity.userRegistrationSuccess()
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
                 activity.hideProgressDialog()
-                Log.e(
-                    activity.javaClass.simpleName,
-                    "Error while registering the user.",
-                    e
-                )
             }
 
     }
 
     fun addYNMQuestion(activity: Activity, question: String){
+        /*
+
+    This function writes the YNMQuestion object to firestore
+
+    */
         val questionInfo = YNMQuestion()
         val timeStamp = System.currentTimeMillis().toString()
         questionInfo.id = timeStamp
@@ -50,19 +63,24 @@ class FirestoreClass {
             .addOnSuccessListener {
                 logToDatabase(LogData(1,"$timeStamp YNMQuestion Added"))
             }
-            .addOnFailureListener{ e ->
+            .addOnFailureListener{
                 when(activity) {
                     is MainActivity -> {
-                        activity.showErrorSnackbar("Could not add question to database",true)
+                        activity.showSnackbar("Could not add question to database",true)
                         logToDatabase(LogData(3,"Could not add question to database"))
                     }
                 }
 
-    }
+            }
 
     }
 
     fun answerYNMQuestion(questionID: String, question:String, answer:String) {
+        /*
+
+    This function writes the YNMAnswer object to firestore
+
+    */
         val questionInfo = YNMAnswer()
         questionInfo.answer = answer
         questionInfo.questionID = questionID
@@ -73,22 +91,26 @@ class FirestoreClass {
             .addOnSuccessListener {
 
             }
-            .addOnFailureListener{ e ->
-                Log.e(
-                    "Test",
-                    "Error while writing log data.",
-                    e
-                )
+            .addOnFailureListener{
+
             }
     }
 
     fun getAllUnansweredYNMQuestions(activity: Activity) {
+        /*
+
+    This function gets all the questions that the user has not answered
+
+    */
         val allQuestions = ArrayList<YNMQuestion>()
         mFireStore.collection(Constants.YNMQUESTION)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    allQuestions.add(document.toObject(YNMQuestion::class.java))
+                    val mQuestion = document.toObject(YNMQuestion::class.java)
+                    if(mQuestion.approved) {
+                        allQuestions.add(mQuestion)
+                    }
                 }
                 val allYNMAnswer = ArrayList<YNMAnswer>()
                 mFireStore.collection(Constants.YNMANSWER)
@@ -104,11 +126,11 @@ class FirestoreClass {
                             }
                         }
                     }
-                    .addOnFailureListener { exception ->
+                    .addOnFailureListener {
 
                     }
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
 
             }
     }
@@ -119,8 +141,8 @@ class FirestoreClass {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    var mQuestion = document.toObject(YNMQuestion::class.java)
-                    if(mQuestion.approved != true)
+                    val mQuestion = document.toObject(YNMQuestion::class.java)
+                    if(!mQuestion.approved)
                     {
                         allQuestions.add(mQuestion)
                     }
@@ -131,7 +153,7 @@ class FirestoreClass {
                     }
                 }
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
             }
     }
 
@@ -167,7 +189,7 @@ class FirestoreClass {
                 }
 
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
             }
     }
 
@@ -177,12 +199,8 @@ class FirestoreClass {
             .addOnSuccessListener {
 
             }
-            .addOnFailureListener{ e ->
-                Log.e(
-                    "Test",
-                    "Error while writing log data.",
-                    e
-                )
+            .addOnFailureListener{
+
             }
     }
 
@@ -255,17 +273,12 @@ class FirestoreClass {
                     }
                 }
             }
-            .addOnFailureListener{e ->
+            .addOnFailureListener{
                 when (activity){
                     is UserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
                 }
-                Log.e(
-                    activity.javaClass.simpleName,
-                    "Error while updating the user details.",
-                    e
-                )
             }
 
     }
@@ -276,31 +289,21 @@ class FirestoreClass {
         )
 
         sRef.putFile(imageFileURI!!).addOnSuccessListener { taskSnapshot ->
-            Log.e(
-                "Firebase Image URL",
-                taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
 
-            )
             taskSnapshot.metadata!!.reference!!.downloadUrl
                 .addOnSuccessListener { uri ->
-                    Log.e("Downloadable Image URL", uri.toString())
                     when (activity) {
                         is UserProfileActivity ->{
                             activity.imageUploadSuccess(uri.toString())
                         }
                     }
                 }
-                .addOnFailureListener{exception ->
+                .addOnFailureListener{
                     when (activity) {
                         is UserProfileActivity ->{
                             activity.hideProgressDialog()
                         }
                     }
-                    Log.e(
-                        activity.javaClass.simpleName,
-                        exception.message,
-                        exception
-                    )
                 }
         }
     }

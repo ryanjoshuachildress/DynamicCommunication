@@ -166,7 +166,7 @@ class UserProfileActivity : BaseActivity() {
                 rbOther.isChecked = true
             }
         }
-        GlideLoader(this).loadUserPicture(userDetails.image!!.toUri(),binding.ivUserPhoto)
+        GlideLoader(this).loadUserPicture(userDetails.image.toUri(),binding.ivUserPhoto)
 
     }
 
@@ -190,15 +190,15 @@ class UserProfileActivity : BaseActivity() {
     private fun validateUserProfileDetails(): Boolean {
         return when {
             TextUtils.isEmpty(binding.etMobileNumber.text.toString().trim{it <= ' '}) -> {
-                showErrorSnackbar("Please enter a mobile number", true)
+                showSnackbar("Please enter a mobile number", true)
                 false
             }
             TextUtils.isEmpty(binding.etFirstName.text.toString().trim{it <= ' '}) -> {
-                showErrorSnackbar("Please enter a First Name", true)
+                showSnackbar("Please enter a First Name", true)
                 false
             }
             TextUtils.isEmpty(binding.etLastName.text.toString().trim{it <= ' '}) -> {
-                showErrorSnackbar("Please enter a Last Name", true)
+                showSnackbar("Please enter a Last Name", true)
                 false
             }
 

@@ -14,7 +14,7 @@ open class BaseActivity : AppCompatActivity() {
     private lateinit var snackbar: Snackbar
     private var doubleBackToExitPressedOnce = false
 
-    fun showErrorSnackbar(message: String, errorMessage: Boolean) {
+    fun showSnackbar(message: String, errorMessage: Boolean) {
         snackbar = Snackbar.make(findViewById(android.R.id.content),message,Snackbar.LENGTH_LONG)
         val snackBarView = snackbar.view
         if(errorMessage)

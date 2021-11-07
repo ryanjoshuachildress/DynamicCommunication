@@ -26,10 +26,12 @@
                 android:contentDescription="Background"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_background" />
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbarMain"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
+
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
@@ -40,7 +42,7 @@
                     android:text="Settings"
                     android:textStyle="bold"
                     android:textColor="@color/color_white"
-                    android:textSize="@dimen/login_screen_title_text_size"/>
+                    android:textSize="@dimen/login_screen_title_text_size" />
             </androidx.appcompat.widget.Toolbar>
         </FrameLayout>
 
@@ -83,7 +85,7 @@
             android:paddingBottom="@dimen/padding"
             android:text="Edit"
             android:textColor="@color/color_secondary_text"
-            android:textSize="@dimen/login_screen_text_size"/>
+            android:textSize="@dimen/login_screen_text_size" />
 
         <com.ryanjoshuachildress.dynamiccommunication.utils.MSPTextViewBold
             android:id="@+id/tvName"
@@ -95,6 +97,7 @@
             android:textColor="@color/color_secondary_text"
             android:textSize="@dimen/login_screen_text_size"
             android:text="Users Name" />
+
         <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +112,7 @@
             android:text="Logout"
             android:textColor="@color/color_white"
             android:textSize="@dimen/splash_title_text_size" />
+
         <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,6 +127,7 @@
             android:text="Administration"
             android:textColor="@color/color_white"
             android:textSize="@dimen/splash_title_text_size" />
+
         <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,7 +143,6 @@
             android:textColor="@color/color_white"
             android:textSize="@dimen/splash_title_text_size" />
     </RelativeLayout>
-
 
 
 </ScrollView>

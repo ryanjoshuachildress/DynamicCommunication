@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -34,13 +35,13 @@ class QuestionActivity : BaseActivity() {
         rvQuestion.itemAnimator = DefaultItemAnimator()
         rvQuestion.adapter = QuestionAdapter(allQuestions, R.layout.layout_rv_question_details)
 
-
         rvQuestion.adapter!!.notifyDataSetChanged()
     }
 
 
     class QuestionAdapter(val questionData: List<YNMQuestion>, val itemLayout: Int) :
         RecyclerView.Adapter<questionViewHolder>() {
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): questionViewHolder {
             var view = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
             return questionViewHolder(view)
@@ -60,19 +61,20 @@ class QuestionActivity : BaseActivity() {
     class questionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun updateQuestion(questionData: YNMQuestion) {
-            tvRVQuestionID?.text = questionData.id
-            tvRVQuestion?.text = questionData.question
-
+            tvRVQuestionID.text = questionData.id
+            tvRVQuestion.text = questionData.question
         }
 
-        private var tvRVQuestionID: TextView?
-        private var tvRVQuestion: TextView?
-        private var ivRVQuestionImage: ImageView?
+        private var tvRVQuestionID: TextView
+        private var tvRVQuestion: TextView
+        private var ivRVQuestionImage: ImageView
+        private var bRVApproveButton: Button
 
         init {
-            ivRVQuestionImage = itemView.findViewById<ImageView>(R.id.ivRVQuestionImage)
-            tvRVQuestion = itemView.findViewById<TextView>(R.id.tvRVQuestion)
-            tvRVQuestionID = itemView.findViewById<TextView>(R.id.tvRVQuestionID)
+            ivRVQuestionImage = itemView.findViewById(R.id.ivRVQuestionImage)
+            tvRVQuestion = itemView.findViewById(R.id.tvRVQuestion)
+            tvRVQuestionID = itemView.findViewById(R.id.tvRVQuestionID)
+            bRVApproveButton = itemView.findViewById(R.id.bRVApproveButton)
         }
     }
 }

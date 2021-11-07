@@ -67,7 +67,7 @@ class ViewLogActivity : BaseActivity() {
             }
             .addOnFailureListener { exception ->
                 hideProgressDialog()
-                showErrorSnackbar(exception.message.toString(),true)
+                showSnackbar(exception.message.toString(),true)
             }
 
 

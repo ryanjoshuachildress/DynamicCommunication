@@ -1,12 +1,26 @@
 <resources>
+
+
     <string name="app_name">DynamicCommunication</string>
     <string name="splash_screen_appName">Dynamic Communication</string>
     <string name="dev_web_url">ryanjoshuachildress.com</string>
     <string name="copyright">Copyright - 2021</string>
+
+
+
     <string name="login_screen_title">LOGIN</string>
     <string name="register_screen_title">REGISTER</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+
+
+    <string name="PleaseWait">Please Wait</string>
+
+
+    <string name="email_blank_error">Please enter an email</string>
+    <string name="login_password_blank_error">Please enter a password</string>
+    <string name="answered_all_questions_error">You have answered all questions. Add some or try again later</string>
+    <string name="failed_to_add_question_error">Failed to add</string>
+
+    <string name="forgot_password_email_sent">Email sent successfully</string>
+
 </resources>

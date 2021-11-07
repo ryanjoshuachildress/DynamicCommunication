@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
+import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
 
 object Constants {
     const val READ_STORAGE_PERMISSION_CODE: Int = 100
@@ -24,7 +25,7 @@ object Constants {
 
     const val MOBILE: String = "mobile"
     const val IMAGE: String = "image"
-    const val USER_PROFILE_IMAGE: String = "user_profile_image/"
+    var USER_PROFILE_IMAGE: String = "user_profile_image/${FirestoreClass().getCurrentUserID()}/"
     const val GENDER: String = "gender"
     const val FIRSTNAME: String = "firstName"
     const val LASTNAME: String = "lastName"

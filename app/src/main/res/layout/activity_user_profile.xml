@@ -40,6 +40,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <FrameLayout
                 android:id="@+id/flUserImage"
                 android:layout_width="@dimen/profile_user_image_size"
@@ -66,6 +67,7 @@
                     android:src="@drawable/default_user_image" />
 
             </FrameLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -87,8 +89,9 @@
                     android:inputType="textPersonName"
                     android:padding="@dimen/padding"
                     android:textColor="@color/color_primary_text"
-                    android:textSize="@dimen/login_screen_text_size"/>
+                    android:textSize="@dimen/login_screen_text_size" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLastName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -110,8 +113,9 @@
                     android:inputType="textPersonName"
                     android:padding="@dimen/padding"
                     android:textColor="@color/color_primary_text"
-                    android:textSize="@dimen/login_screen_text_size"/>
+                    android:textSize="@dimen/login_screen_text_size" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -133,8 +137,9 @@
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/padding"
                     android:textColor="@color/color_primary_text"
-                    android:textSize="@dimen/login_screen_text_size"/>
+                    android:textSize="@dimen/login_screen_text_size" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilMobileNumber"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -156,7 +161,7 @@
                     android:inputType="phone"
                     android:padding="@dimen/padding"
                     android:textColor="@color/color_primary_text"
-                    android:textSize="@dimen/login_screen_text_size"/>
+                    android:textSize="@dimen/login_screen_text_size" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
@@ -183,6 +188,7 @@
                     android:checked="true"
                     android:gravity="center"
                     android:text="Male" />
+
                 <com.ryanjoshuachildress.dynamiccommunication.utils.MSPRadioButton
                     android:id="@+id/rbFemale"
                     android:layout_width="0dp"
@@ -194,6 +200,7 @@
                     android:button="@null"
                     android:gravity="center"
                     android:text="Female" />
+
                 <com.ryanjoshuachildress.dynamiccommunication.utils.MSPRadioButton
                     android:id="@+id/rbOther"
                     android:layout_width="0dp"

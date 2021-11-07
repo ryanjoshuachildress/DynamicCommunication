@@ -1,7 +1,6 @@
 package com.ryanjoshuachildress.dynamiccommunication.ui.activities
 
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -37,16 +36,13 @@ class MainActivity : BaseActivity() {
         // Obtain the FirebaseAnalytics instance.
         analytics = Firebase.analytics
 
-        val sharedPreferences = getSharedPreferences(Constants.DYNAMICCOMMUNICATION_PREFERENCES, Context.MODE_PRIVATE)
-        val username = sharedPreferences.getString(Constants.LOGGED_IN_USERNAME, "")!!
-
 
         btnLaunchYNMAdd.setOnClickListener{
             showYNMAdd()
         }
 
         btnLaunchYNM.setOnClickListener{
-                showProgressDialog("Getting Question")
+                showProgressDialog(getString(R.string.PleaseWait))
                 FirestoreClass().getAllUnansweredYNMQuestions(this)
         }
 
@@ -81,16 +77,16 @@ class MainActivity : BaseActivity() {
     }
 
 fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayList<YNMQuestion>) {
-        var resultQuestions = ArrayList<YNMQuestion>()
-        var bfound = false
+        val resultQuestions = ArrayList<YNMQuestion>()
+        var bFound: Boolean
         for(question in allQuestions){
-            bfound = false
+            bFound = false
             for(answer in allAnswers){
                 if(question.id == answer.questionID){
-                    bfound = true
+                    bFound = true
                 }
             }
-            if(!bfound){
+            if(!bFound){
                 resultQuestions.add(question)
             }
         }
@@ -130,7 +126,7 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
                 },3000)
     }
 
-    fun showYNM(allQuestions: ArrayList<YNMQuestion>)
+    private fun showYNM(allQuestions: ArrayList<YNMQuestion>)
     {
         if(allQuestions.size > 0) {
             val dialog = Dialog(this)
@@ -144,7 +140,7 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
             val tvQuestion = dialog.findViewById(R.id.tvQuestion) as TextView
             val ivQuestionImage = dialog.findViewById(R.id.ivQuestionImage) as ImageView
 
-            val randomIndex = (0..(allQuestions.size - 1)).random()
+            val randomIndex = (0 until (allQuestions.size - 1)).random()
             tvQuestion.text = allQuestions[randomIndex].question
 
 
@@ -178,12 +174,12 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
                 dialog.dismiss()
 
             }
-            if (dialog != null) {
+
                 dialog.show()
-            }
+
         }
         else{
-            showErrorSnackbar("You have answered all questions. Add some or try again later",false)
+            showSnackbar(getString(R.string.answered_all_questions_error),false)
         }
     }
 
@@ -202,7 +198,7 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
                 dialog.dismiss()
             } else
             {
-                showErrorSnackbar("Failed to add", true)
+                showSnackbar(getString(R.string.failed_to_add_question_error), true)
             }
         }
         btnExit.setOnClickListener {
@@ -215,7 +211,7 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
         tvUserCount.text = userCount.toString()
         tvQuestionCount.text = questionCount.toString()
         tvAnswerCount.text = answerCount.toString()
-        android.os.Handler().postDelayed({FirestoreClass().getTotalCounts(this)},20000)
+        Handler().postDelayed({FirestoreClass().getTotalCounts(this)},2000)
     }
     override fun onBackPressed() {
         doubleBackToExit()
