@@ -15,6 +15,7 @@ object Constants {
     const val LOGS: String = "logs"
     const val YNMQUESTION = "YNMQuestion"
     const val YNMANSWER = "YNMAnswer"
+    const val NOTIFICATIONS = "Notifications"
 
     const val DYNAMICCOMMUNICATION_PREFERENCES: String = "DynamicCommunicationPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
@@ -35,6 +36,7 @@ object Constants {
     const val ANSWER_YES: String = "Yes"
     const val ANSWER_NO: String = "No"
     const val ANSWER_MAYBE: String = "Maybe"
+
 
 
 

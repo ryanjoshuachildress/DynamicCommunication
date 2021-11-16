@@ -7,19 +7,19 @@ import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import com.ryanjoshuachildress.dynamiccommunication.R
 import com.ryanjoshuachildress.dynamiccommunication.databinding.ActivityMainBinding
 import com.ryanjoshuachildress.dynamiccommunication.firestore.FirestoreClass
+import com.ryanjoshuachildress.dynamiccommunication.models.User
 import com.ryanjoshuachildress.dynamiccommunication.models.YNMAnswer
 import com.ryanjoshuachildress.dynamiccommunication.models.YNMQuestion
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
+import com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
+import com.ryanjoshuachildress.dynamiccommunication.utils.Users
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -27,6 +27,8 @@ class MainActivity : BaseActivity() {
     private lateinit var analytics: FirebaseAnalytics
 
     private lateinit var binding: ActivityMainBinding
+
+    lateinit var userInfo: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class MainActivity : BaseActivity() {
         // Obtain the FirebaseAnalytics instance.
         analytics = Firebase.analytics
 
+        FirestoreClass().getUserDetails(this)
 
         btnLaunchYNMAdd.setOnClickListener{
             showYNMAdd()
@@ -46,8 +49,20 @@ class MainActivity : BaseActivity() {
                 FirestoreClass().getAllUnansweredYNMQuestions(this)
         }
 
+        btnLaunchSubSpaceMain.setOnClickListener{
+            showProgressDialog(getString(R.string.PleaseWait))
+            Toast.makeText(this,"Comming soon",Toast.LENGTH_LONG).show()
+            hideProgressDialog()
+        }
+
         ivQuestionImage.setOnClickListener{
-            startActivity(Intent(this, QuestionActivity::class.java))
+            if(Users().isModerator(FirestoreClass().getCurrentUserID())) {
+                startActivity(Intent(this, QuestionActivity::class.java))
+            }
+            else
+            {
+                showSnackbar("You must be a moderator to approve questions", true)
+            }
         }
 
         FirestoreClass().getTotalCounts(this)
@@ -70,6 +85,10 @@ class MainActivity : BaseActivity() {
             }
             R.id.action_log -> {
                 startActivity(Intent(this, ViewLogActivity::class.java))
+                true
+            }
+            R.id.action_help -> {
+                startActivity(Intent(this, NotificationActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -108,22 +127,33 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
         val tvMaybeCountPercentage = dialog.findViewById(R.id.tvMaybeCountDetailsPercentage) as TextView
         val tvNoCount = dialog.findViewById(R.id.tvNoCountDetails) as TextView
         val tvMaybeCount = dialog.findViewById(R.id.tvMaybeCountDetails) as TextView
+        val btnClose = dialog.findViewById(R.id.btnYNMQuestionDetailsClose) as MSPButton
+        val btnNextQuestion = dialog.findViewById(R.id.btnYNMQuestionDetailsNextQuestion) as MSPButton
+        var yesPercentage :Int
+        var noPercentage :Int
+        var maybePercentage :Int
 
+        yesPercentage = (yesCount.div(answerCount)*100)
+        maybePercentage = (maybeCount.div(answerCount)*100)
+        noPercentage = (noCount.div(answerCount)*100)
         tvQuestionDetails.text = question
         tvAnswerCount.text = answerCount.toString()
         tvYesCount.text = yesCount.toString()
-        //tvYesCountPercentage.text = ((answerCount.div(yesCount)).toFloat().times(100).toString()+"%")
-        //tvNoCountPercentage.text = ((answerCount.div(noCount)).toFloat().times(100).toString()+"%")
-        //tvMaybeCountPercentage.text = ((answerCount.div(maybeCount)).toFloat().times(100).toString()+"%")
+        tvYesCountPercentage.text = yesPercentage.toString() + "%"
+        tvNoCountPercentage.text = noPercentage.toString() + "%"
+        tvMaybeCountPercentage.text = maybePercentage.toString() + "%"
         tvNoCount.text = noCount.toString()
         tvMaybeCount.text = maybeCount.toString()
+        btnClose.setOnClickListener{
+            dialog.dismiss()
+        }
+        btnNextQuestion.setOnClickListener{
+            showProgressDialog(getString(R.string.PleaseWait))
+            FirestoreClass().getAllUnansweredYNMQuestions(this)
+            dialog.dismiss()
+        }
 
             dialog.show()
-            @Suppress("DEPRECATION")
-            Handler().postDelayed(
-                {
-                    dialog.dismiss()
-                },3000)
     }
 
     private fun showYNM(allQuestions: ArrayList<YNMQuestion>)
@@ -215,5 +245,9 @@ fun validateYNMQuestions(allAnswers: ArrayList<YNMAnswer>,allQuestions: ArrayLis
     }
     override fun onBackPressed() {
         doubleBackToExit()
+    }
+
+    fun LoadUserDetails(userDetails: User) {
+        userInfo = userDetails
     }
 }

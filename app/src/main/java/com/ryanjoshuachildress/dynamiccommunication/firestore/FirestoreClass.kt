@@ -9,10 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.ryanjoshuachildress.dynamiccommunication.models.LogData
-import com.ryanjoshuachildress.dynamiccommunication.models.User
-import com.ryanjoshuachildress.dynamiccommunication.models.YNMAnswer
-import com.ryanjoshuachildress.dynamiccommunication.models.YNMQuestion
+import com.ryanjoshuachildress.dynamiccommunication.models.*
 import com.ryanjoshuachildress.dynamiccommunication.ui.activities.*
 import com.ryanjoshuachildress.dynamiccommunication.utils.Constants
 
@@ -75,6 +72,31 @@ class FirestoreClass {
 
     }
 
+    fun updateYNMQuestion(activity: Activity, question: YNMQuestion){
+        /*
+
+    This function writes the YNMQuestion object to firestore
+
+    */
+
+        mFireStore.collection(Constants.YNMQUESTION)
+            .document(question.id)
+            .set(question, SetOptions.merge())
+            .addOnSuccessListener {
+                logToDatabase(LogData(1,"$question.id YNMQuestion Updated"))
+            }
+            .addOnFailureListener{
+                when(activity) {
+                    is MainActivity -> {
+                        activity.showSnackbar("Could not update question",true)
+                        logToDatabase(LogData(3,"Could not update question"))
+                    }
+                }
+
+            }
+
+    }
+
     fun answerYNMQuestion(questionID: String, question:String, answer:String) {
         /*
 
@@ -108,9 +130,9 @@ class FirestoreClass {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val mQuestion = document.toObject(YNMQuestion::class.java)
-                    if(mQuestion.approved) {
+                  if(mQuestion.approved) {
                         allQuestions.add(mQuestion)
-                    }
+                   }
                 }
                 val allYNMAnswer = ArrayList<YNMAnswer>()
                 mFireStore.collection(Constants.YNMANSWER)
@@ -157,6 +179,52 @@ class FirestoreClass {
             }
     }
 
+    fun getAllNotifications(activity: Activity) {
+        val allNotifications = ArrayList<NotificationInfo>()
+        mFireStore.collection(Constants.NOTIFICATIONS)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val mNotification = document.toObject(NotificationInfo::class.java)
+                    if(mNotification.notificationActive)
+                    {
+                        allNotifications.add(mNotification)
+                    }
+                }
+                when(activity) {
+                    is NotificationActivity -> {
+                        activity.UpdateUI(allNotifications)
+                    }
+                }
+            }
+            .addOnFailureListener {
+            }
+    }
+
+    fun addNotification(activity: Activity,notificationInfo: NotificationInfo) {
+        /*
+
+    This function writes the NotificationInfo object to firestore
+
+    */
+        mFireStore.collection(Constants.NOTIFICATIONS)
+            .add(notificationInfo)
+            .addOnSuccessListener {
+                when(activity) {
+                    is NotificationActivity -> {
+                        activity.notificationWriteSucess()
+                    }
+                }
+            }
+            .addOnFailureListener{
+                when(activity) {
+                    is NotificationActivity -> {
+                        activity.notificationWriteFailure(it.message)
+                    }
+                }
+            }
+    }
+
     fun getQuestionDetails(activity: Activity, question: YNMQuestion) {
         val allAnswers = ArrayList<YNMAnswer>()
         var answerCount = 0
@@ -172,13 +240,13 @@ class FirestoreClass {
                 for((index,document) in result.withIndex()) {
                     allAnswers.add(document.toObject(YNMAnswer::class.java))
                     answerCount += 1
-                    if (allAnswers[index].answer == "Yes") {
+                    if (allAnswers[index].answer == Constants.ANSWER_YES) {
                         yesCount += 1
                     }
-                    if (allAnswers[index].answer == "No") {
+                    if (allAnswers[index].answer == Constants.ANSWER_NO) {
                         noCount += 1
                     }
-                    if (allAnswers[index].answer == "Maybe") {
+                    if (allAnswers[index].answer == Constants.ANSWER_MAYBE) {
                         maybeCount += 1
                     }
                 }
@@ -243,6 +311,9 @@ class FirestoreClass {
                     }
                     is SettingsActivity -> {
                         activity.userDetailSuccess(user)
+                    }
+                    is MainActivity -> {
+                        activity.LoadUserDetails(user)
                     }
                 }
 

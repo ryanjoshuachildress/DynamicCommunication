@@ -13,4 +13,9 @@
         android:icon="@drawable/ic_log"
         android:title="View Logs"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_help"
+        android:icon="@drawable/ic_help"
+        android:title="View help"
+        app:showAsAction="always" />
 </menu>

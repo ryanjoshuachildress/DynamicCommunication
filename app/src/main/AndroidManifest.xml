@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DynamicCommunication">
         <activity
+            android:name=".ui.activities.NotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.QuestionActivity"
             android:exported="false" />
         <activity

@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.QuestionActivity">
 
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvRVQuestionsToApprove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Questions to approve" />
+
+        <TextView
+            android:id="@+id/tvRVQuestionsToApproveData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvQuestion"
         android:layout_width="409dp"
@@ -13,5 +35,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/Header" />
 </androidx.constraintlayout.widget.ConstraintLayout>

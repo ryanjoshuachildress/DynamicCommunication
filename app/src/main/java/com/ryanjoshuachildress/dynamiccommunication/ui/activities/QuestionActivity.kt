@@ -29,17 +29,18 @@ class QuestionActivity : BaseActivity() {
 
     fun loadAllQuestions(loadQuestions: ArrayList<YNMQuestion>)
     {
+
         allQuestions = loadQuestions
         rvQuestion.setHasFixedSize(true)
         rvQuestion.layoutManager = LinearLayoutManager(this)
         rvQuestion.itemAnimator = DefaultItemAnimator()
         rvQuestion.adapter = QuestionAdapter(allQuestions, R.layout.layout_rv_question_details)
-
         rvQuestion.adapter!!.notifyDataSetChanged()
     }
 
 
-    class QuestionAdapter(val questionData: List<YNMQuestion>, val itemLayout: Int) :
+
+    inner class QuestionAdapter(val questionData: List<YNMQuestion>, val itemLayout: Int) :
         RecyclerView.Adapter<questionViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): questionViewHolder {
@@ -50,7 +51,11 @@ class QuestionActivity : BaseActivity() {
         override fun onBindViewHolder(holder: questionViewHolder, position: Int) {
             var mQuestion = questionData.get(position)
             holder.updateQuestion(mQuestion)
+
+
+
         }
+
 
         override fun getItemCount(): Int {
             return questionData.size
@@ -58,12 +63,15 @@ class QuestionActivity : BaseActivity() {
 
     }
 
-    class questionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    inner class questionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun updateQuestion(questionData: YNMQuestion) {
             tvRVQuestionID.text = questionData.id
             tvRVQuestion.text = questionData.question
+
         }
+
 
         private var tvRVQuestionID: TextView
         private var tvRVQuestion: TextView
@@ -75,6 +83,7 @@ class QuestionActivity : BaseActivity() {
             tvRVQuestion = itemView.findViewById(R.id.tvRVQuestion)
             tvRVQuestionID = itemView.findViewById(R.id.tvRVQuestionID)
             bRVApproveButton = itemView.findViewById(R.id.bRVApproveButton)
+
         }
     }
 }

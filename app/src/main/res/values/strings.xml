@@ -7,10 +7,8 @@
     <string name="copyright">Copyright - 2021</string>
 
 
-
     <string name="login_screen_title">LOGIN</string>
     <string name="register_screen_title">REGISTER</string>
-
 
 
     <string name="PleaseWait">Please Wait</string>
@@ -22,5 +20,6 @@
     <string name="failed_to_add_question_error">Failed to add</string>
 
     <string name="forgot_password_email_sent">Email sent successfully</string>
+    <string name="about_text_placeholder">This is a huge test. lets see how this goes. hopefully it will load soon</string>
 
 </resources>

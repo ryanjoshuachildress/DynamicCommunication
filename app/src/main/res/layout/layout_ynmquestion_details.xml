@@ -154,6 +154,32 @@
                 android:text="?"
                 android:textColor="@color/color_white" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
+                android:id="@+id/btnYNMQuestionDetailsClose"
+                android:text="Close"
+                app:layout_constraintTop_toBottomOf="@+id/etQuestion"
+                android:layout_margin="@dimen/margin"
+                android:padding="@dimen/padding"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_background"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <com.ryanjoshuachildress.dynamiccommunication.utils.MSPButton
+                android:id="@+id/btnYNMQuestionDetailsNextQuestion"
+                android:text="Next Question"
+                app:layout_constraintTop_toBottomOf="@+id/btnSave"
+                android:layout_margin="@dimen/margin"
+                android:padding="@dimen/padding"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_background"
+                android:layout_weight=".5"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </LinearLayout>
 
